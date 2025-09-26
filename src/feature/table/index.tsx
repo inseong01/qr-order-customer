@@ -4,9 +4,10 @@ import { ReactNode, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { AnimatePresence } from "motion/react";
 
-import TableInitHeader from "feature/table/table-header/header-index";
-import TableInitMain from "feature/table/table-main/main-index";
-import SubmitButton from "feature/table/components/submit-button/button-index";
+import TableInitHeader from "@/feature/table/header";
+import TableInitMain from "@/feature/table/main";
+import SubmitButton from "@/feature/table/components/submit-button";
+
 import { useBoundStore } from "@/lib/store/use-bound-store";
 import { initCookies } from "@/lib/function/table/set-init-cookies";
 import { ParamsList } from "@/types/common";

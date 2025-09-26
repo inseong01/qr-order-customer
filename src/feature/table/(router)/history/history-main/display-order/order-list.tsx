@@ -1,9 +1,11 @@
 import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
+
+import Divider from "@/feature/table/(router)/components/line/line-index";
+import MenuList from "@/feature/table/(router)/components/main/display/menu-list/list-index";
+import DisplayTotalPrice from "@/feature/table/(router)/components/main/display/total-price/price-index";
+import VerticalStackGroup from "@/feature/table/(router)/components/vertical-stack/stack-index";
+
 import { OrderListType } from "@/types/common";
-import Divider from "feature/table/(router)/components/line/line-index";
-import MenuList from "feature/table/(router)/components/main/display/menu-list/list-index";
-import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
-import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
 
 import { ReactNode } from "react";
 

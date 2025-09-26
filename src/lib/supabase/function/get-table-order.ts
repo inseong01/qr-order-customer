@@ -2,12 +2,13 @@ import { TableList } from "@/types/common";
 import supabase from "../supabase-config";
 
 export default async function getTableOrderList(
-  tableName: string,
+  tableNum: number,
 ): Promise<TableList[]> {
   const response = await supabase
-    .from("qr-order-table-list")
+    .from("readable_order_item")
     .select("*")
-    .eq("tableNum", tableName);
+    .eq("table_number", tableNum);
+
   if (response.error) {
     const msg = response.error.message ?? "GetTableOrderList Error";
 

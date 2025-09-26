@@ -1,5 +1,5 @@
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import CountButton from "feature/table/components/count-button/button-index";
+import CountButton from "@/feature/table/components/count-button/button-index";
 
 // Top
 export function MenuCount() {

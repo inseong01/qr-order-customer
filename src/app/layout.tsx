@@ -1,4 +1,4 @@
-import Loading from "feature/components/loading/loading-index";
+import Loading from "@/feature/components/loading/loading-index";
 import QueryProvider from "./QueryProvider";
 import "./globals.css";
 

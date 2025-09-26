@@ -4,7 +4,7 @@ import Link from "next/link";
 export function SubmitBack() {
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const setMenuCategoryId = useBoundStore(
-    (state) => state.selectMenuCategoryId,
+    (state) => state.selectMenuCategoryTitle,
   );
 
   function onClickSubmitBack() {

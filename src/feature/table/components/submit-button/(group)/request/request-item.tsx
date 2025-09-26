@@ -1,5 +1,5 @@
 import { Request } from "@/types/common";
-import CountButton from "feature/table/components/count-button/button-index";
+import CountButton from "@/feature/table/components/count-button/button-index";
 
 export default function PickItem({ item }: { item: Request }) {
   return (

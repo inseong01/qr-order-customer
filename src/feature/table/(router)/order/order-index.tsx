@@ -1,11 +1,12 @@
 "use client";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
-import SubmitButton from "feature/table/components/submit-button/button-index";
-import AlertModal from "feature/components/modal/alert-modal/modal-index";
+import AlertModal from "@/feature/components/modal/alert-modal/modal-index";
+import AppVisitorHeader from "@/feature/table/(router)/components/header";
+
 import OrderProcedure from "./order-main/main-index";
 import RoutePageFrame from "../components/frame/page/page-index";
+import SubmitButton from "../../components/submit-button";
 
 import { useEffect } from "react";
 

@@ -1,5 +1,5 @@
 export function calculateTotalPrice<
-  T extends { price: number; amount: number },
+  T extends { menu_price: number; quantity: number },
 >(prev: number, current: T) {
-  return prev + current.price * current.amount;
+  return prev + current.menu_price * current.quantity;
 }

@@ -7,12 +7,12 @@ import { HeaderTitle } from "@/types/common";
 import { useRouter } from "next/navigation";
 import { memo } from "react";
 
-function Header({ title }: { title: HeaderTitle }) {
+function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);
   const tableName = useBoundStore((state) => state.tableState.tableName);
-  const selectMenuCategoryId = useBoundStore(
-    (state) => state.selectMenuCategoryId,
+  const selectMenuCategoryTitle = useBoundStore(
+    (state) => state.selectMenuCategoryTitle,
   );
 
   const router = useRouter();
@@ -25,7 +25,7 @@ function Header({ title }: { title: HeaderTitle }) {
       return;
     }
 
-    selectMenuCategoryId({ id: 1 });
+    selectMenuCategoryTitle({ title: "전체메뉴" });
 
     router.back();
   }
@@ -49,4 +49,4 @@ function Header({ title }: { title: HeaderTitle }) {
   );
 }
 
-export default memo(Header);
+export default memo(AppVisitorHeader);

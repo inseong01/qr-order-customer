@@ -1,7 +1,9 @@
-import { MsgType, TableList, TableOrderType } from "@/types/common";
+import { OrderItem } from "@/types/common";
+
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
-import OrderList from "./display-order/order-index";
+import { orderListQueryOption } from "@/lib/function/query/query-option";
+
+import OrderList from "./display-order";
 import MainTagFrame from "../../components/frame/main/main-index";
 import VerticalStackGroup from "../../components/vertical-stack/stack-index";
 import ExceptionMessage from "../../components/exception/show-message/message-index";
@@ -18,7 +20,7 @@ export default function OrderHistory() {
     orderListQueryOption(tableName).queryKey,
   );
 
-  const [orderListArr, setListArr] = useState<TableList["order"]>([]);
+  const [orderListArr, setListArr] = useState<OrderItem[]>([]);
 
   const error = { list: !orderList, staus: orderList?.status === "error" };
   const isError = Object.values(error).some((value) => value);
@@ -30,16 +32,13 @@ export default function OrderHistory() {
   useEffect(() => {
     if (!orderList?.data) return;
 
-    const tableData = orderList.data[0];
-    const copiedOrderData = [...tableData.order].sort(sortDesc);
-    function sortDesc(a: TableOrderType, b: TableOrderType) {
+    function sortDesc(a: OrderItem["created_at"], b: OrderItem["created_at"]) {
       const at = new Date(b.created_at).getTime();
       const bt = new Date(a.created_at).getTime();
-
       return at - bt;
     }
 
-    setListArr(copiedOrderData);
+    setListArr(orderList.data.sort(sortDesc));
   }, [orderList]);
 
   return (
@@ -70,6 +69,7 @@ function ErrorComp({ errorType }: { errorType: [string, boolean] }) {
         <p>{title}</p>
         <Divider />
       </VerticalStackGroup>
+
       <ExceptionMessage domain="history" isServerError={isServerError} />
     </VerticalStackGroup>
   );

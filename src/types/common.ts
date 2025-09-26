@@ -1,32 +1,57 @@
-import { Tables, TablesInsert } from "@/lib/supabase/database.types";
+import { Tables } from "@/lib/supabase/database.types";
 import { StateCreator } from "zustand";
 
 export type LoadingType = "link" | "";
 
 // supabase
-export type MenuList = Tables<"qr-order-menu">;
-export type MenuCategoryList = Tables<"qr-order-category-menu">;
-export type RequestCategoryList = Tables<"qr-order-category-request">;
-export type TableList = Tables<"qr-order-table-list">;
-export type InsertOrderList = TablesInsert<"qr-order-allOrderList">;
-export type InsertRequestList = TablesInsert<"qr-order-request-list">;
+export type MenuList = Tables<"readable_menu">;
+export type MenuCategoryList = Tables<"readable_menu_category">;
+export type RequestCategoryList = Tables<"readable_request_category">;
+export type OrderItem = Tables<"readable_order_item">;
+// export type InsertOrderList = TablesInsert<"qr-order-allOrderList">;
+// export type InsertRequestList = TablesInsert<"qr-order-request-list">;
 
 // supabase variant
-export type CategoryType = "menu" | "request";
-export type TableOrderType = {
-  id: string;
-  orderList: OrderListType[];
-  created_at: Date;
+// export type CategoryType = "menu" | "request";
+// export type TableOrderType = {
+//   id: string;
+//   orderList: OrderListType[];
+//   created_at: Date;
+// };
+// export type OrderListType = {
+//   id: string;
+//   name: string;
+//   price: number;
+//   amount: number;
+// };
+// export type CategoryList<T> = T extends "menu"
+//   ? MenuCategoryList[]
+//   : RequestCategoryList[];
+
+type Line = {
+  points: number[];
 };
-export type OrderListType = {
-  id: string;
-  name: string;
-  price: number;
-  amount: number;
+
+type Bottom = {
+  y: number;
+  line: Line;
+  priceText: {
+    width: number;
+  };
 };
-export type CategoryList<T> = T extends "menu"
-  ? MenuCategoryList[]
-  : RequestCategoryList[];
+
+export type TableMeta = {
+  x: number;
+  y: number;
+  rec: {
+    width: number;
+    height: number;
+  };
+  tableText: {
+    width: number;
+  };
+  bottom: Bottom;
+};
 
 // variant
 export type TagDescription = "인기" | "신규" | "품절" | "";

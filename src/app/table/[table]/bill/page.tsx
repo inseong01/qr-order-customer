@@ -1,6 +1,6 @@
-import BillPage from "feature/table/(router)/bill/bill-index";
-import { getQueryClient } from "@/lib/function/useQuery/get-queryClient";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+import BillPage from "@/feature/table/(router)/bill";
+import { getQueryClient } from "@/lib/function/query/get-queryClient";
+import { orderListQueryOption } from "@/lib/function/query/query-option";
 import { Params } from "@/types/common";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";

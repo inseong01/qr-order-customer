@@ -109,44 +109,41 @@ export const callSlice: SliceCreator<CallSlice> =
       })
     : (set) => ({
         ...initialState,
-        resetCallState: () =>
-          set(initialState),
+        resetCallState: () => set(initialState),
         selectRequest: ({ id, title, amount }: Request) =>
-          set(
-            (state) => {
-              const { selectedRequests } = state.callState;
-              const isIncludedSameItem = selectedRequests.some(
-                (item) => item.id === id,
+          set((state) => {
+            const { selectedRequests } = state.callState;
+            const isIncludedSameItem = selectedRequests.some(
+              (item) => item.id === id,
+            );
+
+            if (isIncludedSameItem) {
+              const prevRequestArr = selectedRequests.filter(
+                (item) => item.id !== id,
               );
+              const isEmptyArr = prevRequestArr.length === 0;
 
-              if (isIncludedSameItem) {
-                const prevRequestArr = selectedRequests.filter(
-                  (item) => item.id !== id,
-                );
-                const isEmptyArr = prevRequestArr.length === 0;
+              if (isEmptyArr) return initialState;
 
-                if (isEmptyArr) return initialState;
-
-                return {
-                  callState: {
-                    ...state.callState,
-                    selectedRequests: prevRequestArr,
-                  },
-                };
-              }
-
-              const updatedRequestArr = [
-                ...selectedRequests,
-                { id, title, amount },
-              ];
               return {
                 callState: {
-                  isClicked: true,
-                  selectedRequests: updatedRequestArr,
+                  ...state.callState,
+                  selectedRequests: prevRequestArr,
                 },
               };
-            },
-          ),
+            }
+
+            const updatedRequestArr = [
+              ...selectedRequests,
+              { id, title, amount },
+            ];
+            return {
+              callState: {
+                isClicked: true,
+                selectedRequests: updatedRequestArr,
+              },
+            };
+          }),
         changeRequestAmount: ({
           id,
           amount,
@@ -154,27 +151,25 @@ export const callSlice: SliceCreator<CallSlice> =
           id: Request["id"];
           amount: Request["amount"];
         }) =>
-          set(
-            (state) => {
-              const { selectedRequests } = state.callState;
-              const changeItemAmount = (item: Request) => {
-                const isSameItem = item.id === id;
+          set((state) => {
+            const { selectedRequests } = state.callState;
+            const changeItemAmount = (item: Request) => {
+              const isSameItem = item.id === id;
 
-                if (isSameItem) return { ...item, amount };
+              if (isSameItem) return { ...item, amount };
 
-                return { ...item };
-              };
+              return { ...item };
+            };
 
-              const updatedRequestArr = [...selectedRequests].map(
-                changeItemAmount,
-              );
+            const updatedRequestArr = [...selectedRequests].map(
+              changeItemAmount,
+            );
 
-              return {
-                callState: {
-                  ...state.callState,
-                  selectedRequests: updatedRequestArr,
-                },
-              };
-            },
-          ),
+            return {
+              callState: {
+                ...state.callState,
+                selectedRequests: updatedRequestArr,
+              },
+            };
+          }),
       });

@@ -2,11 +2,11 @@
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
 import { OrderListType } from "@/types/common";
-import CountButton from "feature/table/components/count-button/button-index";
-import RowSpaceBetween from "feature/table/(router)/components/horizontal-stack/stack-between/between-index";
-import Divider from "feature/table/(router)/components/line/line-index";
-import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
-import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
+import CountButton from "@/feature/table/components/count-button/button-index";
+import RowSpaceBetween from "@/feature/table/(router)/components/horizontal-stack/stack-between/between-index";
+import Divider from "@/feature/table/(router)/components/line/line-index";
+import DisplayTotalPrice from "@/feature/table/(router)/components/main/display/total-price/price-index";
+import VerticalStackGroup from "@/feature/table/(router)/components/vertical-stack/stack-index";
 
 export default function CheckOrderList() {
   const currentOrderList = useBoundStore((state) => state.orderState.list);

@@ -1,38 +1,37 @@
-import { ReactNode } from "react";
-
 import { MenuCategoryList } from "@/types/common";
+
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import CategoryUnderBar from "./category-mark";
+
+import CategoryUnderBar from "./category-under-bar";
+
+import { ReactNode } from "react";
 
 export default function MenuCategory({
   category,
 }: {
   category: MenuCategoryList;
 }) {
-  const currentCategoryId = useBoundStore((state) => state.categoryState.id);
-  const selectMenuCategoryId = useBoundStore(
-    (state) => state.selectMenuCategoryId,
+  const currentCategoryTitle = useBoundStore(
+    (state) => state.categoryState.title,
+  );
+  const selectMenuCategoryTitle = useBoundStore(
+    (state) => state.selectMenuCategoryTitle,
   );
 
   function onClickChangeMenuTitle() {
-    if (currentCategoryId === category.id) return;
-
-    selectMenuCategoryId({ id: category.id });
+    if (currentCategoryTitle === category.title) return;
+    selectMenuCategoryTitle({ title: category.title });
   }
 
   return (
     <MenuCategoryBox onClickChangeMenuTitle={onClickChangeMenuTitle}>
-      <Category title={category.title} />
+      {/* 분류 이름 */}
+      <div className={`relative w-full text-center`} data-id="menuCategory">
+        <span className={"text-sm"}>{category.title}</span>
+      </div>
+
       <CategoryUnderBar category={category} />
     </MenuCategoryBox>
-  );
-}
-
-function Category({ title }: { title: string }) {
-  return (
-    <div className={`relative w-full text-center`} data-id="menuCategory">
-      <span className={"text-sm"}>{title}</span>
-    </div>
   );
 }
 

@@ -6,11 +6,16 @@ export default function MenuList({ listData }: { listData: OrderListType[] }) {
   return (
     <VerticalStackGroup tag="ul" gap="gap-5">
       {listData.map((menu, idx) => {
-        const { name, amount, price } = menu;
-        const priceToString = price.toLocaleString();
+        const { menu_name, quantity, menu_price } = menu;
+        const priceToString = menu_price.toLocaleString();
 
         return (
-          <Item key={idx} name={name} amount={amount} price={priceToString} />
+          <Item
+            key={idx}
+            name={menu_name}
+            amount={quantity}
+            price={priceToString}
+          />
         );
       })}
     </VerticalStackGroup>

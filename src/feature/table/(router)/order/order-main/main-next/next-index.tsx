@@ -1,9 +1,9 @@
 "use client";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+import { orderListQueryOption } from "@/lib/function/query/query-option";
 import ProcessedOrderList from "./display-order/order-index";
-import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
+import VerticalStackGroup from "@/feature/table/(router)/components/vertical-stack/stack-index";
 
 import { motion } from "motion/react";
 import { useQueryClient } from "@tanstack/react-query";

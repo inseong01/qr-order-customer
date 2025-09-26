@@ -1,9 +1,9 @@
-import TableInitPage from "feature/table/table-index";
-import { getQueryClient } from "@/lib/function/useQuery/get-queryClient";
+import TableInitPage from "@/feature/table";
+import { getQueryClient } from "@/lib/function/query/get-queryClient";
 import {
-  categoryListQueryOption,
+  menuCategoryListQueryOption,
   menuListQueryOption,
-} from "@/lib/function/useQuery/query-option";
+} from "@/lib/function/query/query-option";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
@@ -15,7 +15,7 @@ async function Page() {
   // parallel process
   await Promise.all([
     queryClient.prefetchQuery(menuListQueryOption),
-    queryClient.prefetchQuery(categoryListQueryOption),
+    queryClient.prefetchQuery(menuCategoryListQueryOption),
   ]);
 
   return (

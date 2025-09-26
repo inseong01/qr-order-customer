@@ -1,10 +1,10 @@
 import { memo, ReactNode } from "react";
 
-import HeaderBottom from "./header-bottom";
-import HeaderMiddle from "./header-middle";
-import HeaderTop from "./header-top";
+import HeaderBottom from "./bottom";
+import HeaderMiddle from "./middle";
+import HeaderTop from "./top";
 
-function TableInitInfo() {
+function TableInitHeader() {
   return (
     <TableInitHeaderBox>
       <HeaderTop />
@@ -26,4 +26,4 @@ function TableInitHeaderBox({ children }: { children: ReactNode }) {
   );
 }
 
-export default memo(TableInitInfo);
+export default memo(TableInitHeader);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+import { orderListQueryOption } from "@/lib/function/query/query-option";
 import CheckOrderList from "./display-order/order-index";
 import ProcessResult from "./main-next/next-index";
 import Divider from "../../components/line/line-index";

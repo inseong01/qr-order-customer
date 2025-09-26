@@ -1,16 +1,24 @@
+import useEnableScroll from "@/lib/hook/scroll-menu-category/use-enable-scroll";
+import { menuCategoryListQueryOption } from "@/lib/function/query/query-option";
+import { measureCallbackElapsed } from "@/lib/function/measure/measure-callback-elapsed";
+
+import MenuCategory from "./category-list";
+
 import { motion } from "motion/react";
 import { ReactNode, useRef, useState } from "react";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { categoryListQueryOption } from "@/lib/function/useQuery/query-option";
-import useEnableScroll from "@/lib/hook/scroll-menu-category/use-enable-scroll";
-import { measureCallbackElapsed } from "@/lib/function/measure/measure-callback-elapsed";
-import MenuCategory from "./category-list";
-import { CategoryList } from "@/types/common";
 
 export default function ScrollMenuCateory() {
+  const queryClient = useQueryClient();
+  const categoryList = queryClient.getQueryData(
+    menuCategoryListQueryOption.queryKey,
+  );
+
   return (
     <ScrollMenuCateoryBox>
-      <MenuCategoryList />
+      {categoryList?.map((category, idx) => {
+        return <MenuCategory key={idx} category={category} />;
+      })}
     </ScrollMenuCateoryBox>
   );
 }
@@ -20,7 +28,7 @@ function ScrollMenuCateoryBox({ children }: { children: ReactNode }) {
 
   const scrollContainer = useRef<HTMLDivElement>(null);
 
-  const { data } = useSuspenseQuery(categoryListQueryOption);
+  const { data } = useSuspenseQuery(menuCategoryListQueryOption);
 
   const { isScrollAble } = useEnableScroll(scrollContainer);
 
@@ -85,23 +93,6 @@ function ScrollMenuCateoryBox({ children }: { children: ReactNode }) {
           {children}
         </motion.div>
       )}
-    </>
-  );
-}
-
-function MenuCategoryList() {
-  const queryClient = useQueryClient();
-  const categoryList = queryClient.getQueryData<CategoryList<"menu">>([
-    "menuCategory",
-  ]);
-
-  return (
-    <>
-      {categoryList
-        ?.filter((list) => list.id !== 0)
-        .map((category, idx) => {
-          return <MenuCategory key={idx} category={category} />;
-        })}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { menu_parents } from "@/lib/motion/display-menu/menu-variants";
-import { menuListQueryOption } from "@/lib/function/useQuery/query-option";
+import { menuListQueryOption } from "@/lib/function/query/query-option";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { MenuList } from "@/types/common";
+
 import Item from "./menu-item";
 
 import { ReactNode, useMemo } from "react";
@@ -11,12 +11,15 @@ import { motion } from "motion/react";
 export default function MenuDisplay() {
   const { data, isFetched } = useSuspenseQuery(menuListQueryOption);
 
-  const currentCategoryId = useBoundStore((state) => state.categoryState.id);
+  const currentCategoryTitle = useBoundStore(
+    (state) => state.categoryState.title,
+  );
 
-  const currentCategoryMenu = data.filter(selectedCategoryMenu);
-  function selectedCategoryMenu(list: MenuList) {
-    return list.sortId === currentCategoryId;
-  }
+  const currentCategoryMenu = data.filter((d) =>
+    currentCategoryTitle === "전체메뉴"
+      ? true
+      : d.menu_category.title === currentCategoryTitle,
+  );
 
   return (
     <MainMenuBox isFetched={isFetched}>

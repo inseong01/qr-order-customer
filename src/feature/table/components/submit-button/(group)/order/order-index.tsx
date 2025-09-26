@@ -1,6 +1,6 @@
 import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import DisplayTotalPrice from "feature/table/(router)/components/main/display/total-price/price-index";
+import DisplayTotalPrice from "@/feature/table/(router)/components/main/display/total-price/price-index";
 
 import { useEffect, useState } from "react";
 

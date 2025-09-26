@@ -1,4 +1,4 @@
-import LogoImage from "feature/components/logo/logo-index";
+import LogoImage from "@/feature/components/logo/logo-index";
 import RowSpaceBetween from "../(router)/components/horizontal-stack/stack-between/between-index";
 
 export default function HeaderTop() {

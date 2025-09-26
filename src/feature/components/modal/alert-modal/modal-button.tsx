@@ -1,4 +1,4 @@
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+import { orderListQueryOption } from "@/lib/function/query/query-option";
 import { useBoundStore } from "@/lib/store/use-bound-store";
 
 import { useQueryClient } from "@tanstack/react-query";
@@ -8,7 +8,7 @@ export function ConfirmButton() {
   const tableName = useBoundStore((state) => state.tableState.tableName);
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const setMenuCategoryId = useBoundStore(
-    (state) => state.selectMenuCategoryId,
+    (state) => state.selectMenuCategoryTitle,
   );
 
   function onClickContinue() {

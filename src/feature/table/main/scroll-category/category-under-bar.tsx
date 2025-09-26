@@ -9,17 +9,19 @@ export default function CategoryUnderBar({
 }: {
   category: MenuCategoryList;
 }) {
-  // useState
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-  // store
-  const currentCategoryId = useBoundStore((state) => state.categoryState.id);
+  const currentCategoryTitle = useBoundStore(
+    (state) => state.categoryState.title,
+  );
 
   useEffect(() => {
     setIsFirstLoad(false);
   }, []);
 
   return (
-    <>{!isFirstLoad && currentCategoryId === category.id && <UnderBar />}</>
+    <>
+      {!isFirstLoad && currentCategoryTitle === category.title && <UnderBar />}
+    </>
   );
 }
 

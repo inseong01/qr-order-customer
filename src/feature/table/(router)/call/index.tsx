@@ -1,11 +1,13 @@
 "use client";
 
-import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import SubmitButton from "feature/table/components/submit-button/button-index";
-import AlertModal from "feature/components/modal/alert-modal/modal-index";
-import CallPageMain from "./call-main/main-index";
+
+import AppVisitorHeader from "@/feature/table/(router)/components/header";
+import AlertModal from "@/feature/components/modal/alert-modal/modal-index";
+
+import CallPageMain from "./call-main";
 import RoutePageFrame from "../components/frame/page/page-index";
+import SubmitButton from "../../components/submit-button";
 
 import { useEffect } from "react";
 import { AnimatePresence } from "motion/react";

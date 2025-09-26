@@ -1,13 +1,13 @@
 "use client";
 
+import AppVisitorHeader from "@/feature/table/(router)/components/header";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
-import OrderHistory from "./history-main/main-index";
+import BillPageMain from "./bill-main";
 import RoutePageFrame from "../components/frame/page/page-index";
 
 import { useEffect } from "react";
 
-export default function HistoryPage() {
+export default function BillPage() {
   const setFlag = useBoundStore((state) => state.setFlag);
 
   useEffect(() => {
@@ -16,8 +16,8 @@ export default function HistoryPage() {
 
   return (
     <RoutePageFrame>
-      <AppVisitorHeader title={"주문내역"} />
-      <OrderHistory />
+      <AppVisitorHeader title={"계산서"} />
+      <BillPageMain />
     </RoutePageFrame>
   );
 }

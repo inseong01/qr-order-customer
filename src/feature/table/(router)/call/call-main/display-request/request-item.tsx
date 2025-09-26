@@ -20,6 +20,8 @@ function Request({
   );
 }
 
+export default memo(Request);
+
 function RequestBox({
   req,
   isIncludedItem,
@@ -59,5 +61,3 @@ function RequestBox({
     </motion.div>
   );
 }
-
-export default memo(Request);
