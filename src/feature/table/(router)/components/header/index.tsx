@@ -1,8 +1,9 @@
 "use client";
 
-import SimpleIcon from "../../../components/simple-icon/icon-index";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { HeaderTitle } from "@/types/common";
+
+import { HeaderTitle } from "./types";
+import SimpleIcon from "../../../components/simple-icon/icon-index";
 
 import { useRouter } from "next/navigation";
 import { memo } from "react";

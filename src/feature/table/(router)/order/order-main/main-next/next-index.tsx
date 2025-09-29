@@ -68,13 +68,13 @@ function ProcessedtOrder() {
   return (
     <VerticalStackGroup tag="div" gap="gap-5">
       <MenuListBox>
-        {isOk ? (
-          <ProcessedOrderList queryData={orderList.data} />
-        ) : (
-          <EmptyListComponent />
-        )}
+        {isOk ? <ProcessedOrderList /> : <EmptyListComponent />}
       </MenuListBox>
-      <BillInfo tableName={tableName} />
+
+      <div className={"flex flex-col gap-1 text-center text-xs text-[#959595]"}>
+        <span>결제는 후불입니다.</span>
+        <span>현재 앉아 계신 테이블 번호는 {tableName}번 입니다.</span>
+      </div>
     </VerticalStackGroup>
   );
 }
@@ -87,15 +87,6 @@ function MenuListBox({ children }: { children: ReactNode }) {
       }
     >
       {children}
-    </div>
-  );
-}
-
-function BillInfo({ tableName }: { tableName: string }) {
-  return (
-    <div className={"flex flex-col gap-1 text-center text-xs text-[#959595]"}>
-      <span>결제는 후불입니다.</span>
-      <span>현재 앉아 계신 테이블 번호는 {tableName}번 입니다.</span>
     </div>
   );
 }

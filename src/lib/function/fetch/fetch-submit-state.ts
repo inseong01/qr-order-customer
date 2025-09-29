@@ -4,6 +4,7 @@ import postRequestList from "../../supabase/function/post-request-list";
 import { AllSlices, useBoundStore } from "../../store/use-bound-store";
 import { SubmitSlice } from "../../store/util/submit-slice";
 
+/* TODO: query mutation 적용 */
 export const postSubmitState =
   process.env.NODE_ENV === "development"
     ? async ({

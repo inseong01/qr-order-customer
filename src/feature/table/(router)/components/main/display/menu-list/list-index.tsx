@@ -1,11 +1,12 @@
-import { OrderListType } from "@/types/common";
-import VerticalStackGroup from "../../../vertical-stack/stack-index";
-import Item from "./list-item";
+import { OrderList } from "@/types/table";
 
-export default function MenuList({ listData }: { listData: OrderListType[] }) {
+import Item from "./list-item";
+import VerticalStackGroup from "../../../vertical-stack/stack-index";
+
+export default function MenuList({ orders }: { orders: OrderList[] }) {
   return (
     <VerticalStackGroup tag="ul" gap="gap-5">
-      {listData.map((menu, idx) => {
+      {orders.map((menu, idx) => {
         const { menu_name, quantity, menu_price } = menu;
         const priceToString = menu_price.toLocaleString();
 

@@ -15,16 +15,15 @@ export default function BillPageMain() {
   const tableName = useBoundStore((state) => state.tableState.tableName);
 
   const queryClient = useQueryClient();
-  const { data, status } = queryClient.getQueryState(
+  const orderListQuery = queryClient.getQueryState(
     orderListQueryOption(tableName).queryKey,
   );
 
-  const error = { orderList: !data, staus: status === "error" };
-  const isError = Object.values(error).some((value) => value);
-  const errorType = Object.entries(error).filter(
-    ([_, value]) => value === true,
-  );
-  const orderListArr = isError ? [] : data;
+  const orderList = {
+    data: orderListQuery?.data ?? [],
+    status: orderListQuery?.status ?? "pending",
+  };
+  const orders = orderList.status === "success" ? orderList.data : [];
 
   return (
     <MainTagFrame>
@@ -37,10 +36,13 @@ export default function BillPageMain() {
         </div>
 
         <BillBox>
-          {isError ? (
-            <ErrorComp errorType={errorType[0]} />
+          {orderList.status !== "success" ? (
+            <ExceptionMessage
+              domain="bill"
+              isServerError={orderList.status === "error"}
+            />
           ) : (
-            <Bill orderItems={orderListArr} />
+            <Bill orders={orders} />
           )}
         </BillBox>
       </VerticalStackGroup>
@@ -58,11 +60,4 @@ function BillBox({ children }: { children: ReactNode }) {
       {children}
     </div>
   );
-}
-
-function ErrorComp({ errorType }: { errorType: [string, boolean] }) {
-  const [key] = errorType;
-  const isServerError = key === "status";
-
-  return <ExceptionMessage domain="bill" isServerError={isServerError} />;
 }

@@ -26,6 +26,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["public", "server.mjs", "src", ".next/types/**/*.ts"],
+  "include": ["public", "server.mjs", "src", ".next/types/**/*.ts", "env.d.ts"],
   "exclude": ["node_modules"]
 }

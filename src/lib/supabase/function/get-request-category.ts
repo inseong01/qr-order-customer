@@ -1,4 +1,4 @@
-import supabase from "../supabase-config";
+import { supabase } from "../client";
 
 export default async function getRequestCategories() {
   const response = await supabase

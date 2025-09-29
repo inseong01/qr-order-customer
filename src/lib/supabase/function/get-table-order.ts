@@ -1,13 +1,11 @@
-import { TableList } from "@/types/common";
-import supabase from "../supabase-config";
+import { supabase } from "../client";
 
-export default async function getTableOrderList(
-  tableNum: number,
-): Promise<TableList[]> {
+export default async function getTableOrderList(tableNum: number) {
   const response = await supabase
     .from("readable_order_item")
     .select("*")
-    .eq("table_number", tableNum);
+    .eq("table_number", tableNum)
+    .order("created_at", { ascending: false });
 
   if (response.error) {
     const msg = response.error.message ?? "GetTableOrderList Error";

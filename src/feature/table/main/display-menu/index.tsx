@@ -18,7 +18,7 @@ export default function MenuDisplay() {
   const currentCategoryMenu = data.filter((d) =>
     currentCategoryTitle === "전체메뉴"
       ? true
-      : d.menu_category.title === currentCategoryTitle,
+      : d.category_title === currentCategoryTitle,
   );
 
   return (

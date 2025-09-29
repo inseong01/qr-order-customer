@@ -1,4 +1,4 @@
-import { TableMeta } from "@/types/common";
+import { TableMeta } from "@/types/metadata";
 
 export type Json =
   | string
@@ -18,7 +18,7 @@ export type Database = {
     Tables: {
       menu: {
         Row: {
-          category_id: string;
+          category_id: number | null;
           id: string;
           img_url: string;
           name: string;
@@ -26,7 +26,7 @@ export type Database = {
           tag: string;
         };
         Insert: {
-          category_id?: string;
+          category_id?: number | null;
           id?: string;
           img_url?: string;
           name?: string;
@@ -34,7 +34,7 @@ export type Database = {
           tag?: string;
         };
         Update: {
-          category_id?: string;
+          category_id?: number | null;
           id?: string;
           img_url?: string;
           name?: string;
@@ -49,19 +49,33 @@ export type Database = {
             referencedRelation: "menu_category";
             referencedColumns: ["id"];
           },
+          {
+            foreignKeyName: "menu_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "readable_menu";
+            referencedColumns: ["category_id"];
+          },
+          {
+            foreignKeyName: "menu_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "readable_menu_category";
+            referencedColumns: ["id"];
+          },
         ];
       };
       menu_category: {
         Row: {
-          id: string;
+          id: number;
           title: string;
         };
         Insert: {
-          id?: string;
+          id?: number;
           title?: string;
         };
         Update: {
-          id?: string;
+          id?: number;
           title?: string;
         };
         Relationships: [];
@@ -129,6 +143,20 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
+            foreignKeyName: "order_item_menu_id_fkey";
+            columns: ["menu_id"];
+            isOneToOne: false;
+            referencedRelation: "readable_menu";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "order_item_menu_id_fkey";
+            columns: ["menu_id"];
+            isOneToOne: false;
+            referencedRelation: "readable_order_item";
+            referencedColumns: ["menu_id"];
+          },
+          {
             foreignKeyName: "order_item_order_id_fkey";
             columns: ["order_id"];
             isOneToOne: false;
@@ -139,7 +167,7 @@ export type Database = {
       };
       request: {
         Row: {
-          created_at: string | null;
+          created_at: string;
           id: string;
           is_read: boolean;
           table_id: string;
@@ -211,6 +239,13 @@ export type Database = {
             foreignKeyName: "request_item_category_id_fkey";
             columns: ["category_id"];
             isOneToOne: false;
+            referencedRelation: "readable_request_category";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "request_item_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
             referencedRelation: "request_category";
             referencedColumns: ["id"];
           },
@@ -231,7 +266,7 @@ export type Database = {
         };
         Insert: {
           id?: string;
-          meta: TableMeta;
+          meta?: TableMeta;
           number: number;
         };
         Update: {
@@ -243,14 +278,63 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      readable_menu: {
+        Row: {
+          category_id: number;
+          category_title: string;
+          id: string;
+          img_url: string;
+          name: string;
+          price: number;
+          tag: string;
+        };
+        Relationships: [];
+      };
+      readable_menu_category: {
+        Row: {
+          id: number;
+          title: string;
+        };
+        Insert: {
+          id?: number | null;
+          title?: string | null;
+        };
+        Update: {
+          id?: number | null;
+          title?: string | null;
+        };
+        Relationships: [];
+      };
+      readable_order_item: {
+        Row: {
+          created_at: string;
+          id: string;
+          menu_id: string;
+          menu_name: string;
+          menu_price: number;
+          quantity: number;
+          table_number: number;
+        };
+        Relationships: [];
+      };
+      readable_request_category: {
+        Row: {
+          id: string;
+          title: string;
+        };
+        Insert: {
+          id?: string | null;
+          title?: string | null;
+        };
+        Update: {
+          id?: string | null;
+          title?: string | null;
+        };
+        Relationships: [];
+      };
     };
-    Functions: {
-      [_ in never]: never;
-    };
-    Enums: {
-      [_ in never]: never;
-    };
+    Functions: {};
+    Enums: {};
     CompositeTypes: {
       [_ in never]: never;
     };

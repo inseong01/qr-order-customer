@@ -5,16 +5,16 @@ import MenuList from "@/feature/table/(router)/components/main/display/menu-list
 import DisplayTotalPrice from "@/feature/table/(router)/components/main/display/total-price/price-index";
 import VerticalStackGroup from "@/feature/table/(router)/components/vertical-stack/stack-index";
 
-import { OrderItem } from "@/types/common";
+import { OrderList } from "@/types/table";
 
-export default function Bill({ orderItems }: { orderItems: OrderItem[] }) {
-  const totalPrice = orderItems.reduce(calculateTotalPrice, 0);
+export default function Bill({ orders }: { orders: OrderList[] }) {
+  const totalPrice = orders.reduce(calculateTotalPrice, 0);
   const totalPriceToString = totalPrice.toLocaleString();
 
   return (
     <>
       <VerticalStackGroup tag="div" gap="gap-5">
-        <MenuList listData={orderItems} />
+        <MenuList orders={orders} />
       </VerticalStackGroup>
 
       <Divider />

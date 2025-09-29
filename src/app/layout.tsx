@@ -2,10 +2,10 @@ import Loading from "@/feature/components/loading/loading-index";
 import QueryProvider from "./QueryProvider";
 import "./globals.css";
 
-import { Inter } from "next/font/google";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactNode } from "react";
+import { Inter } from "next/font/google";
 import { Metadata, Viewport } from "next";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "QR 오더",

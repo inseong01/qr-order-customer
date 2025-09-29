@@ -1,4 +1,4 @@
-import { TableList } from "@/types/common";
+import { OrderList } from "@/types/table";
 
 import Divider from "@/feature/table/(router)/components/line/line-index";
 import VerticalStackGroup from "@/feature/table/(router)/components/vertical-stack/stack-index";
@@ -8,12 +8,8 @@ import DisplayTotalPrice from "../../../components/main/display/total-price/pric
 
 import { ReactNode } from "react";
 
-export default function OrderList({
-  orderListArr,
-}: {
-  orderListArr: TableList["order"];
-}) {
-  return orderListArr.map((order, idx) => {
+export default function OrderListDisplay({ orders }: { orders: OrderList[] }) {
+  return orders.map((order, idx) => {
     const { menu_name, quantity, menu_price } = order;
     const priceToString = menu_price.toLocaleString();
     const totalPriceToString = (quantity * menu_price).toLocaleString();
@@ -22,7 +18,7 @@ export default function OrderList({
       <VerticalStackGroup key={idx} tag="div" gap="gap-5">
         {/* 구분 */}
         <VerticalStackGroup tag="div" gap="gap-2.5">
-          <p>{orderListArr.length - idx}번째 주문</p>
+          <p>{orders.length - idx}번째 주문</p>
 
           <Divider />
         </VerticalStackGroup>
@@ -36,7 +32,9 @@ export default function OrderList({
               amount={quantity}
               price={priceToString}
             />
+
             <Divider />
+
             <DisplayTotalPrice title="결제금액" price={totalPriceToString} />
           </MenuListBox>
         </VerticalStackGroup>

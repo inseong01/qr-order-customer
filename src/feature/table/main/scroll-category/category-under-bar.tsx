@@ -1,5 +1,5 @@
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { MenuCategoryList } from "@/types/common";
+import { MenuCategoryList } from "@/types/table";
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";

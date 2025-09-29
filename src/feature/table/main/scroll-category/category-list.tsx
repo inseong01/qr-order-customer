@@ -1,4 +1,4 @@
-import { MenuCategoryList } from "@/types/common";
+import { MenuCategoryList } from "@/types/table";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
 

@@ -1,4 +1,5 @@
-import { Request, SliceCreator } from "@/types/common";
+import { Request } from "@/types/common";
+import { SliceCreator } from "@/types/slice";
 
 type InitialState = {
   callState: {

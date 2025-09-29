@@ -1,4 +1,4 @@
-import { SliceCreator } from "@/types/common";
+import { SliceCreator } from "@/types/slice";
 
 type InitialState = {
   flagState: {

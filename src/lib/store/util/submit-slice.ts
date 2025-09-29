@@ -1,4 +1,6 @@
-import { SelectedMenu, SliceCreator, Status } from "@/types/common";
+import { SliceCreator } from "@/types/slice";
+import { SelectedMenu, Status } from "@/types/common";
+
 import { postSubmitState } from "../../function/fetch/fetch-submit-state";
 
 type FetchMode = "order" | "request" | "";
@@ -87,8 +89,7 @@ export const submitSlice: SliceCreator<SubmitSlice> =
       })
     : (set, get) => ({
         ...initialState,
-        resetSubmitState: () =>
-          set(initialState),
+        resetSubmitState: () => set(initialState),
         fetchOrderArr: ({
           orderList,
           submitError,
@@ -102,13 +103,9 @@ export const submitSlice: SliceCreator<SubmitSlice> =
           postSubmitState({ requestStr, set, get });
         },
         setNexPageEnable: ({ isNext }: { isNext: boolean }) =>
-          set(
-            (state) => ({ submitState: { ...state.submitState, isNext } }),
-          ),
+          set((state) => ({ submitState: { ...state.submitState, isNext } })),
         setFetchMode: ({ mode }: { mode: FetchMode }) =>
-          set(
-            (state) => ({
-              submitState: { ...state.submitState, fetchMode: mode },
-            }),
-          ),
+          set((state) => ({
+            submitState: { ...state.submitState, fetchMode: mode },
+          })),
       });

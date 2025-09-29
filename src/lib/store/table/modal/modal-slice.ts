@@ -1,4 +1,4 @@
-import { ModalType, SliceCreator } from '@/types/common';
+import { ModalType, SliceCreator } from "@/types/slice";
 
 type InitialState = {
   modalState: {
@@ -9,7 +9,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   modalState: {
-    type: '',
+    type: "",
     isOpen: false,
   },
 };
@@ -24,20 +24,20 @@ export interface ModalSlice {
 }
 
 export const modalSlice: SliceCreator<ModalSlice> =
-  process.env.NODE_ENV === 'development'
+  process.env.NODE_ENV === "development"
     ? (set) => ({
         ...initialState,
         setModalType: ({ type }: { type: ModalType }) =>
           set(
             (state) => ({ modalState: { ...state.modalState, type } }),
             undefined,
-            'modalState/setModalType'
+            "modalState/setModalType",
           ),
         setModalOpen: ({ isOpen }: { isOpen: boolean }) =>
           set(
             (state) => ({ modalState: { ...state.modalState, isOpen } }),
             undefined,
-            'modalState/setModalOpen'
+            "modalState/setModalOpen",
           ),
       })
     : (set) => ({

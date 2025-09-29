@@ -3,7 +3,7 @@ import { memo, ReactNode } from "react";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
 import { request_child } from "@/lib/motion/display-request/request-variants";
-import { RequestCategoryList } from "@/types/common";
+import { RequestCategoryList } from "@/types/table";
 
 function Request({
   req,

@@ -1,5 +1,5 @@
 import { InsertOrderList, SelectedMenu } from "@/types/common";
-import supabase from "../supabase-config";
+import { supabase } from "../client";
 
 export default async function postOrderList(
   tableName: number,

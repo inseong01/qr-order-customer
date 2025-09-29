@@ -1,5 +1,5 @@
 import { InsertRequestList } from "@/types/common";
-import supabase from "../supabase-config";
+import { supabase } from "../client";
 
 export default async function postRequestList(
   tableName: number,

@@ -2,12 +2,9 @@
 
 import calculateAmount from "@/lib/function/count-button/calculate-amount";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import {
-  CountButtonType,
-  IconType,
-  Request,
-  SelectedMenu,
-} from "@/types/common";
+import { Request, SelectedMenu } from "@/types/common";
+
+import { CountButtonType, IconType } from "./types";
 import SimpleIcon from "../simple-icon/icon-index";
 
 export default function CountButton({

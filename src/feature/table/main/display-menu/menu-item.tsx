@@ -1,7 +1,10 @@
 import { menu_child } from "@/lib/motion/display-menu/menu-variants";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { MenuList, TagDescription } from "@/types/common";
+import { MenuList } from "@/types/table";
+
 import MenuAddIcon from "./menu-add";
+import { TagDescription } from "../types";
+import { PUBLIC_STORAGE_URL } from "../const";
 
 import { motion } from "motion/react";
 import { memo } from "react";
@@ -57,12 +60,12 @@ function Item({ list }: { list: MenuList }) {
         </div>
 
         <Image
-          src={`https://onofrsiptqngmwfzenlr.supabase.co/storage/v1/object/public/qr-order-img/store_2/${img_url}`}
+          src={`${PUBLIC_STORAGE_URL}/${img_url}`}
           alt={name}
           width={100}
           height={60}
           placeholder="blur"
-          blurDataURL={`https://onofrsiptqngmwfzenlr.supabase.co/storage/v1/object/public/qr-order-img/store_2/${img_url}`}
+          blurDataURL={`${PUBLIC_STORAGE_URL}/${img_url}`}
           style={{
             objectFit: "cover",
             filter: tag === "soldout" ? "opacity(0.5)" : "opacity(1)",

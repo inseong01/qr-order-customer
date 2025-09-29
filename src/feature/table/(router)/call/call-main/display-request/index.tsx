@@ -1,6 +1,6 @@
 import { request_parents } from "@/lib/motion/display-request/request-variants";
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { RequestCategoryList } from "@/types/common";
+import { RequestCategoryList } from "@/types/table";
 import Request from "./request-item";
 
 import { motion } from "motion/react";
