@@ -1,18 +1,32 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
-import { urlRedirect } from "./util/middleware/url-redirect";
 import { updateSession } from "./lib/supabase/middleware";
+import { validateDevice } from "./util/middleware/validate-device";
+import { validateTableURL } from "./util/middleware/validate-url";
+import { setTableCookie } from "./util/middleware/set-table-cookie";
 
 export async function middleware(request: NextRequest) {
-  let response;
+  const pathname = request.nextUrl.pathname;
 
-  // response = await urlRedirect(request);
-
-  if (request.nextUrl.pathname.startsWith("/table")) {
-    response = await updateSession(request);
+  // /table/[번호]/[하위 페이지]
+  if (pathname.split("/").length > 3) {
+    const urlResult = validateTableURL(request);
+    if (urlResult) return urlResult;
   }
 
-  return response;
+  // table/*
+  if (pathname.startsWith("/table")) {
+    const deviceResult = validateDevice(request);
+    if (deviceResult) return deviceResult;
+
+    const tableResult = await setTableCookie(request);
+    if (tableResult) return tableResult;
+
+    const sessionResult = await updateSession(request);
+    if (sessionResult) return sessionResult;
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

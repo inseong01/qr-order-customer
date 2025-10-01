@@ -45,8 +45,7 @@ export async function updateSession(request: NextRequest) {
   if (!user) {
     // user 없는 경우 익명 로그인 페이지 이동
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    console.log("login", url);
+    url.pathname = "/auth/verify";
     return NextResponse.redirect(url);
   }
 

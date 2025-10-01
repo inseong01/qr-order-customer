@@ -9,7 +9,6 @@ import TableInitMain from "@/feature/table/main";
 import SubmitButton from "@/feature/table/components/submit-button";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { initCookies } from "@/lib/function/table/set-init-cookies";
 
 import { ParamsList } from "./(router)/order/types";
 
@@ -40,8 +39,6 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
   useEffect(() => {
     // 초기 접속 할당
     if (!tableName) {
-      // 테이블 - 쿠키 할당
-      initCookies(params);
       // 테이블 - 전역 상태
       setTableName(params);
     }
