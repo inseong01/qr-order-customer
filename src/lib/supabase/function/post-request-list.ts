@@ -1,12 +1,12 @@
 import { InsertRequestList } from "@/types/common";
-import { supabase } from "../client";
+import { createClient } from "../client";
 
 export default async function postRequestList(
   tableName: number,
   requestList: string,
 ) {
   const insertData: InsertRequestList = { tableNum: tableName, requestList };
-  const response = await supabase
+  const response = await createClient()
     .from("qr-order-request-list")
     .insert(insertData)
     .select();

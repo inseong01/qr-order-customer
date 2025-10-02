@@ -617,3 +617,15 @@ chore: 미들웨어 개선 및 익명 로그인 구현
 
   - 예외처리
     - 로그인, 캡챠 발급 실패: 캡챠 재시도
+
+25.10.2.
+chore: SSR 데이터 패칭 적용
+
+- Supabase server/client DB 쿼리 생성
+
+- React Query staleTime 기본값 0 할당
+  - 이전 데이터 캐싱 오류 원인
+
+- View RLS 적용
+
+- 메인 페이지, 빈 데이터 예외 처리

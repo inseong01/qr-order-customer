@@ -1,7 +1,7 @@
 import CallPage from "@/feature/table/(router)/call";
-import { getQueryClient } from "@/lib/function/query/get-queryClient";
-import { requestListQueryOption } from "@/lib/function/query/query-option";
-import { Params } from "@/types/common";
+import { Params } from "@/feature/table/(router)/types";
+import { getQueryClient } from "@/lib/function/query/get-query-client";
+import { initRequestListQueryOption } from "@/lib/function/query/query-option";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
@@ -24,7 +24,7 @@ export async function generateMetadata({
 
 export default async function Page() {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(requestListQueryOption);
+  await queryClient.prefetchQuery(initRequestListQueryOption);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

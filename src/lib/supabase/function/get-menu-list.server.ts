@@ -1,7 +1,7 @@
-import { createClient } from "../client";
+import { createClient } from "../server";
 
-export async function getMenuList() {
-  const supabase = createClient();
+export async function getMenuListSSR() {
+  const supabase = await createClient();
   const { data, error } = await supabase.from("readable_menu").select(`*`);
 
   if (error) {

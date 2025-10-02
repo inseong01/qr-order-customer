@@ -1,5 +1,5 @@
 import BillPage from "@/feature/table/(router)/bill";
-import { getQueryClient } from "@/lib/function/query/get-queryClient";
+import { getQueryClient } from "@/lib/function/query/get-query-client";
 import { orderListQueryOption } from "@/lib/function/query/query-option";
 import { Params } from "@/types/common";
 

@@ -1,7 +1,7 @@
-import { createClient } from "../client";
+import { createClient } from "../server";
 
-export async function getTableOrderList(tableNum: number) {
-  const supabase = createClient();
+export async function getTableOrderListSSR(tableNum: number) {
+  const supabase = await createClient();
   const response = await supabase
     .from("readable_order_item")
     .select("*")

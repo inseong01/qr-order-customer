@@ -27,7 +27,7 @@ export async function handleCaptchaLogin(captchaToken: string) {
         captchaToken,
         data: {
           signup_origin: "qr_order_client",
-          role: "guest",
+          user_role: "guest",
         },
       },
     });

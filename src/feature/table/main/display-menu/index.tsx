@@ -23,8 +23,11 @@ export default function MenuDisplay() {
 
   return (
     <MainMenuBox isFetched={isFetched}>
-      {isFetched &&
-        currentCategoryMenu.map((list, idx) => <Item key={idx} list={list} />)}
+      {data.length > 0 ? (
+        currentCategoryMenu.map((list, idx) => <Item key={idx} list={list} />)
+      ) : (
+        <div className="text-center">표시할 메뉴가 없습니다.</div>
+      )}
     </MainMenuBox>
   );
 }

@@ -1,17 +1,23 @@
-import { QueryCache, QueryClient, defaultShouldDehydrateQuery, isServer } from '@tanstack/react-query';
+import {
+  QueryCache,
+  QueryClient,
+  defaultShouldDehydrateQuery,
+  isServer,
+} from "@tanstack/react-query";
 
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
         // 프리패칭 데이터 만료 시간 지정
-        staleTime: 1000 * 60,
+        staleTime: 0,
         refetchOnWindowFocus: false,
       },
       dehydrate: {
         // SSR, pending 데이터도 dehydrate 처리
         shouldDehydrateQuery: (query) =>
-          defaultShouldDehydrateQuery(query) || query.state.status === 'pending',
+          defaultShouldDehydrateQuery(query) ||
+          query.state.status === "pending",
       },
     },
     queryCache: new QueryCache({

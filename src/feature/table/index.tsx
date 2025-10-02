@@ -10,7 +10,7 @@ import SubmitButton from "@/feature/table/components/submit-button";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
 
-import { ParamsList } from "./(router)/order/types";
+import { ParamsList } from "./(router)/types";
 
 export default function TableInitPage() {
   return (

@@ -6,29 +6,30 @@ import MenuCategory from "./category-list";
 
 import { motion } from "motion/react";
 import { ReactNode, useRef, useState } from "react";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 export default function ScrollMenuCateory() {
-  const queryClient = useQueryClient();
-  const categoryList = queryClient.getQueryData(
-    menuCategoryListQueryOption.queryKey,
-  );
+  const { data } = useSuspenseQuery(menuCategoryListQueryOption);
 
   return (
-    <ScrollMenuCateoryBox>
-      {categoryList?.map((category, idx) => {
+    <ScrollXBox isFetched={data.length > 0}>
+      {data.map((category, idx) => {
         return <MenuCategory key={idx} category={category} />;
       })}
-    </ScrollMenuCateoryBox>
+    </ScrollXBox>
   );
 }
 
-function ScrollMenuCateoryBox({ children }: { children: ReactNode }) {
+function ScrollXBox({
+  isFetched,
+  children,
+}: {
+  isFetched: boolean;
+  children: ReactNode;
+}) {
   const [scrollStart, geScrollX] = useState({ x: 0, scrollX: 0 });
 
   const scrollContainer = useRef<HTMLDivElement>(null);
-
-  const { data } = useSuspenseQuery(menuCategoryListQueryOption);
 
   const { isScrollAble } = useEnableScroll(scrollContainer);
 
@@ -77,7 +78,7 @@ function ScrollMenuCateoryBox({ children }: { children: ReactNode }) {
 
   return (
     <>
-      {data && (
+      {isFetched && (
         <motion.div
           ref={scrollContainer}
           className={

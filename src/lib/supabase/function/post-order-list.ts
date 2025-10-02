@@ -1,12 +1,12 @@
 import { InsertOrderList, SelectedMenu } from "@/types/common";
-import { supabase } from "../client";
+import { createClient } from "../client";
 
 export default async function postOrderList(
   tableName: number,
   orderList: SelectedMenu[],
 ) {
   const insertData: InsertOrderList = { tableNum: tableName, orderList };
-  const response = await supabase
+  const response = await createClient()
     .from("qr-order-allOrderList")
     .insert(insertData)
     .select();
