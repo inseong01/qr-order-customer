@@ -12,18 +12,18 @@ export default function HeaderMiddle() {
 }
 
 function RestaurantInfo() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const number = useBoundStore((state) => state.tableState.number);
 
   return (
     <div className={"mb-1 flex gap-2"}>
       <h1 className="text-2xl">희락카츠 </h1>
-      {tableName && (
+      {number && (
         <motion.span
           className={"text-sm"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          #{tableName}
+          #{number}
         </motion.span>
       )}
     </div>

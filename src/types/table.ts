@@ -19,7 +19,7 @@ export type OrderList = Tables<"readable_order_item">;
 //   id: string;
 //   name: string;
 //   price: number;
-//   amount: number;
+//   quantity: number;
 // };
 // export type CategoryList<T> = T extends "menu"
 //   ? import { MenuCategoryList } from "@/types/table";[]

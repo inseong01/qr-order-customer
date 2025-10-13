@@ -15,7 +15,7 @@ const initialState: InitialState = {
     selectedMenu: {
       name: "",
       price: 0,
-      amount: 1,
+      quantity: 1,
       id: "",
     },
     list: [],
@@ -41,13 +41,17 @@ export interface OrderSlice {
   selectClickedMenu: () => void;
   selectMenuInstantly: (menu: SelectedMenu) => void;
   removeSelectedMenu: ({ id }: { id: SelectedMenu["id"] }) => void;
-  changeMenuAmount: ({ amount }: { amount: SelectedMenu["amount"] }) => void;
+  changeMenuAmount: ({
+    quantity,
+  }: {
+    quantity: SelectedMenu["quantity"];
+  }) => void;
   changeMenuAmountInList: ({
     id,
-    amount,
+    quantity,
   }: {
     id: SelectedMenu["id"];
-    amount: SelectedMenu["amount"];
+    quantity: SelectedMenu["quantity"];
   }) => void;
 }
 
@@ -56,7 +60,7 @@ export const orderSlice: SliceCreator<OrderSlice> =
     ? (set) => ({
         ...initialState,
         resetOrderState: () =>
-          set(initialState, undefined, "orderState/resetPickUpState"),
+          set(initialState, undefined, "orderState/resetOrderState"),
         clickMenu: ({
           name,
           price,
@@ -72,7 +76,7 @@ export const orderSlice: SliceCreator<OrderSlice> =
               const defaultMenuValue = {
                 name,
                 price,
-                amount: 1,
+                quantity: 1,
                 id,
               };
               const isSameMenuClickAgain = isClicked && selectedMenu.id === id;
@@ -102,7 +106,7 @@ export const orderSlice: SliceCreator<OrderSlice> =
                   const isSameMenu = list.id === selectedMenu.id;
 
                   if (isSameMenu)
-                    return { ...list, amount: selectedMenu.amount };
+                    return { ...list, quantity: selectedMenu.quantity };
 
                   return list;
                 };
@@ -164,12 +168,16 @@ export const orderSlice: SliceCreator<OrderSlice> =
             "orderState/removeSelectedMenu",
           ),
         // button, 수량 변경
-        changeMenuAmount: ({ amount }: { amount: SelectedMenu["amount"] }) =>
+        changeMenuAmount: ({
+          quantity,
+        }: {
+          quantity: SelectedMenu["quantity"];
+        }) =>
           set(
             (state) => {
               const updatedMenuObj = {
                 ...state.orderState.selectedMenu,
-                amount,
+                quantity,
               };
 
               return {
@@ -185,17 +193,17 @@ export const orderSlice: SliceCreator<OrderSlice> =
         // [table]/order, 메뉴 수량 변경
         changeMenuAmountInList: ({
           id,
-          amount,
+          quantity,
         }: {
           id: SelectedMenu["id"];
-          amount: SelectedMenu["amount"];
+          quantity: SelectedMenu["quantity"];
         }) =>
           set(
             (state) => {
               const { list } = state.orderState;
               const updateMenuAmountInList = (list: SelectedMenu) => {
                 const isSameMenu = list.id === id;
-                if (isSameMenu) return { ...list, amount };
+                if (isSameMenu) return { ...list, quantity };
                 return { ...list };
               };
               const updatedOrderArr = list.map(updateMenuAmountInList);
@@ -228,7 +236,7 @@ export const orderSlice: SliceCreator<OrderSlice> =
             const defaultMenuValue = {
               name,
               price,
-              amount: 1,
+              quantity: 1,
               id,
             };
             const isSameMenuClickAgain = isClicked && selectedMenu.id === id;
@@ -253,7 +261,8 @@ export const orderSlice: SliceCreator<OrderSlice> =
               const updateMenuAmount = (list: SelectedMenu) => {
                 const isSameMenu = list.id === selectedMenu.id;
 
-                if (isSameMenu) return { ...list, amount: selectedMenu.amount };
+                if (isSameMenu)
+                  return { ...list, quantity: selectedMenu.quantity };
 
                 return list;
               };
@@ -304,11 +313,15 @@ export const orderSlice: SliceCreator<OrderSlice> =
             };
           }),
         // button, 메뉴 수량 변경
-        changeMenuAmount: ({ amount }: { amount: SelectedMenu["amount"] }) =>
+        changeMenuAmount: ({
+          quantity,
+        }: {
+          quantity: SelectedMenu["quantity"];
+        }) =>
           set((state) => {
             const updatedMenuObj = {
               ...state.orderState.selectedMenu,
-              amount,
+              quantity,
             };
 
             return {
@@ -321,16 +334,16 @@ export const orderSlice: SliceCreator<OrderSlice> =
         // [table]/order, 메뉴 수량 변경
         changeMenuAmountInList: ({
           id,
-          amount,
+          quantity,
         }: {
           id: SelectedMenu["id"];
-          amount: SelectedMenu["amount"];
+          quantity: SelectedMenu["quantity"];
         }) =>
           set((state) => {
             const { list } = state.orderState;
             const updateMenuAmountInList = (list: SelectedMenu) => {
               const isSameMenu = list.id === id;
-              if (isSameMenu) return { ...list, amount };
+              if (isSameMenu) return { ...list, quantity };
               return { ...list };
             };
             const updatedOrderArr = list.map(updateMenuAmountInList);

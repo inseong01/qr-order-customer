@@ -18,7 +18,9 @@ interface MyMeta extends Record<string, unknown> {
   queryKey 일치하지 않으면 queryOptions에서 오류 발생
   기본) type QueryKey = [...ReadonlyArray<unknown>]
 */
-type QueryKey = ["menuList" | "menuCategory" | "requestCategory" | "orderList"];
+type QueryKey = [
+  "menuList" | "menuCategory" | "requestCategory" | "orderList" | "table",
+];
 
 declare module "@tanstack/react-query" {
   interface Register {

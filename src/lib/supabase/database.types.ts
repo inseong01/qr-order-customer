@@ -93,7 +93,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           is_done?: boolean;
-          order_number: number;
+          order_number?: number;
           table_id?: string;
           updated_at?: string | null;
         };

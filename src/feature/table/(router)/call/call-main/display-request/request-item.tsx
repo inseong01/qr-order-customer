@@ -41,7 +41,7 @@ function RequestBox({
     title: RequestCategoryList["title"];
   }) {
     return () => {
-      selectRequest({ id, title, amount: 1 });
+      selectRequest({ id, title, quantity: 1 });
     };
   }
 

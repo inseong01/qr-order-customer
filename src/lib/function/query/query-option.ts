@@ -3,6 +3,7 @@ import { getTableOrderList } from "@/lib/supabase/function/get-table-order";
 import { getMenuCategoryList } from "@/lib/supabase/function/get-menu-category";
 import { getRequestCategories } from "@/lib/supabase/function/get-request-category";
 
+import { getTableSSR } from "@/lib/supabase/function/get-table.server";
 import { getMenuListSSR } from "@/lib/supabase/function/get-menu-list.server";
 import { getTableOrderListSSR } from "@/lib/supabase/function/get-table-order.server";
 import { getMenuCategoryListSSR } from "@/lib/supabase/function/get-menu-category.server";
@@ -64,22 +65,32 @@ export const initRequestListQueryOption = queryOptions({
   },
 });
 
-export const orderListQueryOption = (tableNum: string) =>
+export const orderListQueryOption = (tableNum: number) =>
   queryOptions({
     queryKey: ["orderList"],
-    queryFn: () => getTableOrderList(Number(tableNum)),
+    queryFn: () => getTableOrderList(tableNum),
     retry: 1,
     meta: {
       errorMessage: "주문 목록을 불러오는데 실패하였습니다.",
     },
   });
 
-export const initOrderListQueryOption = (tableNum: string) =>
+export const initOrderListQueryOption = (tableNum: number) =>
   queryOptions({
     queryKey: ["orderList"],
-    queryFn: () => getTableOrderListSSR(Number(tableNum)),
+    queryFn: () => getTableOrderListSSR(tableNum),
     retry: 1,
     meta: {
       errorMessage: "주문 목록을 불러오는데 실패하였습니다.",
     },
   });
+
+export const initTableQueryOption = queryOptions({
+  queryKey: ["table"],
+  queryFn: getTableSSR,
+  retry: 1,
+  staleTime: Infinity,
+  meta: {
+    errorMessage: "좌석 정보를 불러오는데 실패하였습니다.",
+  },
+});

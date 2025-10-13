@@ -6,7 +6,7 @@ import { useBoundStore } from "@/lib/store/use-bound-store";
 type RouterCategory = "call" | "history" | "bill";
 
 export default function HeaderBottom() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const number = useBoundStore((state) => state.tableState.number);
   const requestIsClicked = useBoundStore((state) => state.flagState.isClicked);
   const setFlag = useBoundStore((state) => state.setFlag);
 
@@ -16,7 +16,7 @@ export default function HeaderBottom() {
     return () => {
       if (requestIsClicked) return;
       setFlag({ isClicked: true });
-      router.push(`${tableName}/${category}`);
+      router.push(`${number}/${category}`);
     };
   }
 

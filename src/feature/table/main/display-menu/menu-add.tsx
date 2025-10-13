@@ -37,7 +37,7 @@ export default function MenuAddIcon({ list }: { list: MenuList }) {
   function onClickPlusIcon({ name, price, id, tag }: MenuList) {
     if (tag === "soldout") return;
 
-    const menu = { name, price, amount: 1, id };
+    const menu = { name, price, quantity: 1, id };
 
     selectMenuInstantly(menu);
   }

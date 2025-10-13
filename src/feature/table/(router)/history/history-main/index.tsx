@@ -10,11 +10,11 @@ import Divider from "../../components/line/line-index";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function OrderHistory() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const number = useBoundStore((state) => state.tableState.number)!;
 
   const queryClient = useQueryClient();
   const orderListQuery = queryClient.getQueryState(
-    orderListQueryOption(tableName).queryKey,
+    orderListQueryOption(number).queryKey,
   );
 
   const orderList = {

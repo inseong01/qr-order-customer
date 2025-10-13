@@ -1,4 +1,5 @@
-import { IconType } from "@/types/common";
+import { IconType } from "../count-button/types";
+
 import { ReactNode } from "react";
 
 export default function SimpleIcon({ type }: { type: IconType }) {

@@ -1,4 +1,3 @@
-import { calculateTotalPrice } from "@/lib/function/(router)/calculateTotalPrice";
 import { useBoundStore } from "@/lib/store/use-bound-store";
 import DisplayTotalPrice from "@/feature/table/(router)/components/main/display/total-price/price-index";
 
@@ -8,7 +7,10 @@ import { useEffect, useState } from "react";
 export function TotalPrice() {
   const orderList = useBoundStore((state) => state.orderState.list);
 
-  const totalPrice = orderList.reduce(calculateTotalPrice, 0);
+  const totalPrice = orderList.reduce(
+    (prev, curr) => prev + curr.price * curr.quantity,
+    0,
+  );
   const totalPriceToString = totalPrice.toLocaleString();
 
   return <DisplayTotalPrice title="합계" price={totalPriceToString} />;

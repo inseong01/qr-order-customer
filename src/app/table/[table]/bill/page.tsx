@@ -1,7 +1,7 @@
 import BillPage from "@/feature/table/(router)/bill";
+import { Params } from "@/feature/table/(router)/types";
 import { getQueryClient } from "@/lib/function/query/get-query-client";
 import { orderListQueryOption } from "@/lib/function/query/query-option";
-import { Params } from "@/types/common";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Metadata } from "next";
@@ -26,7 +26,9 @@ export default async function Page({ params }: { params: Params }) {
   const paramsObj = await params;
 
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(orderListQueryOption(paramsObj.table));
+  await queryClient.prefetchQuery(
+    orderListQueryOption(Number(paramsObj.table)),
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

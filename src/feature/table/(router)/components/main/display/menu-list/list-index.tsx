@@ -3,7 +3,11 @@ import { OrderList } from "@/types/table";
 import Item from "./list-item";
 import VerticalStackGroup from "../../../vertical-stack/stack-index";
 
-export default function MenuList({ orders }: { orders: OrderList[] }) {
+export default function MenuList({
+  orders,
+}: {
+  orders: Pick<OrderList, "menu_name" | "quantity" | "menu_price">[];
+}) {
   return (
     <VerticalStackGroup tag="ul" gap="gap-5">
       {orders.map((menu, idx) => {
@@ -14,7 +18,7 @@ export default function MenuList({ orders }: { orders: OrderList[] }) {
           <Item
             key={idx}
             name={menu_name}
-            amount={quantity}
+            quantity={quantity}
             price={priceToString}
           />
         );

@@ -25,7 +25,9 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Params }) {
   const paramsObj = await params;
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(initOrderListQueryOption(paramsObj.table));
+  await queryClient.prefetchQuery(
+    initOrderListQueryOption(Number(paramsObj.table)),
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

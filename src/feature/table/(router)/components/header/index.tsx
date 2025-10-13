@@ -11,10 +11,8 @@ import { memo } from "react";
 function AppVisitorHeader({ title }: { title: HeaderTitle }) {
   const isSubmit = useBoundStore((state) => state.submitState.isSubmit);
   const submitStatus = useBoundStore((state) => state.submitState.status);
-  const tableName = useBoundStore((state) => state.tableState.tableName);
-  const selectMenuCategoryTitle = useBoundStore(
-    (state) => state.selectMenuCategoryTitle,
-  );
+  const number = useBoundStore((state) => state.tableState.number);
+  const selectMenuCategory = useBoundStore((state) => state.selectMenuCategory);
 
   const router = useRouter();
 
@@ -22,11 +20,11 @@ function AppVisitorHeader({ title }: { title: HeaderTitle }) {
     if (isSubmit) return;
     if (submitStatus === "fulfilled") {
       // 주문 페이지 돌아오기 방지
-      router.replace(`/table/${tableName}`);
+      router.replace(`/table/${number}`);
       return;
     }
 
-    selectMenuCategoryTitle({ title: "전체메뉴" });
+    selectMenuCategory({ title: "전체메뉴" });
 
     router.back();
   }

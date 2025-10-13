@@ -1,4 +1,4 @@
-import { Params } from "@/types/common";
+import { Params } from "@/feature/table/(router)/types";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";

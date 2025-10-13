@@ -7,5 +7,3 @@ export type SliceCreator<T> = StateCreator<
   [],
   T
 >;
-
-export type ModalType = "orderCheck" | "request" | "";

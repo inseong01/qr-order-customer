@@ -29,7 +29,7 @@ export default function OrderListDisplay({ orders }: { orders: OrderList[] }) {
             <Item
               key={idx}
               name={menu_name}
-              amount={quantity}
+              quantity={quantity}
               price={priceToString}
             />
 

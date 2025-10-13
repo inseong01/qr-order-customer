@@ -1,23 +1,72 @@
-import { InsertOrderList, SelectedMenu } from "@/types/common";
+import { SelectedMenu } from "@/types/common";
+
 import { createClient } from "../client";
+import { Database } from "../database.types";
 
-export default async function postOrderList(
-  tableName: number,
-  orderList: SelectedMenu[],
-) {
-  const insertData: InsertOrderList = { tableNum: tableName, orderList };
-  const response = await createClient()
-    .from("qr-order-allOrderList")
-    .insert(insertData)
+type OrderInsertTable = Database["public"]["Tables"]["order"]["Insert"];
+type OrderItemInsertTable =
+  Database["public"]["Tables"]["order_item"]["Insert"];
+
+type OrderData = Required<Pick<OrderInsertTable, "id" | "table_id">>;
+type OrderItemData = Required<
+  Pick<OrderItemInsertTable, "menu_id" | "order_id" | "quantity">
+>;
+
+export type OrderProps = {
+  id: string;
+  table_id: string;
+  menu: Required<Pick<SelectedMenu, "id" | "quantity">>[];
+};
+
+export default async function postOrderList(order: OrderProps) {
+  // if (process.env.NODE_ENV === "development") {
+  //   // return new Promise<
+  //   //   {
+  //   //     id: string;
+  //   //     menu_id: string;
+  //   //     order_id: string;
+  //   //     quantity: number;
+  //   //   }[]
+  //   // >((res) => setTimeout(() => res([]), 1500));
+  //   return new Promise<
+  //     {
+  //       id: string;
+  //       menu_id: string;
+  //       order_id: string;
+  //       quantity: number;
+  //     }[]
+  //   >((_, rej) => setTimeout(() => rej([]), 500));
+  // }
+
+  // order
+  const orderData: OrderData = { id: order.id, table_id: order.table_id };
+  const orderRes = await createClient()
+    .from("order")
+    .insert(orderData)
     .select();
-  if (response.error) {
+
+  if (orderRes.error) {
     const msg =
-      response.error.message ?? "주문이 정상적으로 처리되지 않았습니다.";
-
-    console.error(msg);
-
-    // 조건문을 통해 에러를 판별, 에러 던지지 않음
-    return { error: { message: msg } };
+      orderRes.error.message ?? "주문이 정상적으로 처리되지 않았습니다.";
+    throw new Error(msg);
   }
-  return response;
+
+  // order_item
+  const orderItemData: OrderItemData[] = order.menu.map((m) => ({
+    menu_id: m.id,
+    quantity: m.quantity,
+    order_id: order.id,
+  }));
+  const orderItemRes = await createClient()
+    .from("order_item")
+    .insert(orderItemData)
+    .select();
+
+  if (orderItemRes.error) {
+    const msg =
+      orderItemRes.error.message ?? "주문이 정상적으로 처리되지 않았습니다.";
+    throw new Error(msg);
+  }
+
+  return orderItemRes;
 }

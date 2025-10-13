@@ -12,11 +12,11 @@ import ExceptionMessage from "../../components/exception/show-message/message-in
 import { ReactNode } from "react";
 
 export default function BillPageMain() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const number = useBoundStore((state) => state.tableState.number)!;
 
   const queryClient = useQueryClient();
   const orderListQuery = queryClient.getQueryState(
-    orderListQueryOption(tableName).queryKey,
+    orderListQueryOption(number).queryKey,
   );
 
   const orderList = {
@@ -32,7 +32,7 @@ export default function BillPageMain() {
           className={"flex flex-col gap-1 text-center text-xs text-[#959595]"}
         >
           <span>결제는 후불입니다.</span>
-          <span>현재 앉아 계신 테이블 번호는 {tableName}번 입니다.</span>
+          <span>현재 앉아 계신 테이블 번호는 {number}번 입니다.</span>
         </div>
 
         <BillBox>

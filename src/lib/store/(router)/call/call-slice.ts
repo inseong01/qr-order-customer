@@ -21,13 +21,13 @@ export interface CallSlice {
     selectedRequests: Request[];
   };
   resetCallState: () => void;
-  selectRequest: ({ id, title, amount }: Request) => void;
+  selectRequest: ({ id, title, quantity }: Request) => void;
   changeRequestAmount: ({
     id,
-    amount,
+    quantity,
   }: {
     id: Request["id"];
-    amount: Request["amount"];
+    quantity: Request["quantity"];
   }) => void;
 }
 
@@ -37,7 +37,7 @@ export const callSlice: SliceCreator<CallSlice> =
         ...initialState,
         resetCallState: () =>
           set(initialState, undefined, "callState/resetCallState"),
-        selectRequest: ({ id, title, amount }: Request) =>
+        selectRequest: ({ id, title, quantity }: Request) =>
           set(
             (state) => {
               const { selectedRequests } = state.callState;
@@ -63,7 +63,7 @@ export const callSlice: SliceCreator<CallSlice> =
 
               const updatedRequestArr = [
                 ...selectedRequests,
-                { id, title, amount },
+                { id, title, quantity },
               ];
               return {
                 callState: {
@@ -77,10 +77,10 @@ export const callSlice: SliceCreator<CallSlice> =
           ),
         changeRequestAmount: ({
           id,
-          amount,
+          quantity,
         }: {
           id: Request["id"];
-          amount: Request["amount"];
+          quantity: Request["quantity"];
         }) =>
           set(
             (state) => {
@@ -88,7 +88,7 @@ export const callSlice: SliceCreator<CallSlice> =
               const changeItemAmount = (item: Request) => {
                 const isSameItem = item.id === id;
 
-                if (isSameItem) return { ...item, amount };
+                if (isSameItem) return { ...item, quantity };
 
                 return { ...item };
               };
@@ -111,7 +111,7 @@ export const callSlice: SliceCreator<CallSlice> =
     : (set) => ({
         ...initialState,
         resetCallState: () => set(initialState),
-        selectRequest: ({ id, title, amount }: Request) =>
+        selectRequest: ({ id, title, quantity }: Request) =>
           set((state) => {
             const { selectedRequests } = state.callState;
             const isIncludedSameItem = selectedRequests.some(
@@ -136,7 +136,7 @@ export const callSlice: SliceCreator<CallSlice> =
 
             const updatedRequestArr = [
               ...selectedRequests,
-              { id, title, amount },
+              { id, title, quantity },
             ];
             return {
               callState: {
@@ -147,17 +147,17 @@ export const callSlice: SliceCreator<CallSlice> =
           }),
         changeRequestAmount: ({
           id,
-          amount,
+          quantity,
         }: {
           id: Request["id"];
-          amount: Request["amount"];
+          quantity: Request["quantity"];
         }) =>
           set((state) => {
             const { selectedRequests } = state.callState;
             const changeItemAmount = (item: Request) => {
               const isSameItem = item.id === id;
 
-              if (isSameItem) return { ...item, amount };
+              if (isSameItem) return { ...item, quantity };
 
               return { ...item };
             };

@@ -16,22 +16,22 @@ export interface MenuCategorySlice {
   categoryState: {
     title: string;
   };
-  selectMenuCategoryTitle: ({ title }: { title: string }) => void;
+  selectMenuCategory: ({ title }: { title: string }) => void;
 }
 
 export const menuCategorySlice: SliceCreator<MenuCategorySlice> =
   process.env.NODE_ENV === "development"
     ? (set) => ({
         ...initialState,
-        selectMenuCategoryTitle: ({ title }: { title: string }) =>
+        selectMenuCategory: ({ title }: { title: string }) =>
           set(
             () => ({ categoryState: { title: title } }),
             undefined,
-            "categoryState/selectMenuCategoryTitle",
+            "categoryState/selectMenuCategory",
           ),
       })
     : (set) => ({
         ...initialState,
-        selectMenuCategoryTitle: ({ title }: { title: string }) =>
+        selectMenuCategory: ({ title }: { title: string }) =>
           set(() => ({ categoryState: { title: title } })),
       });

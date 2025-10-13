@@ -14,13 +14,11 @@ export default function MenuCategory({
   const currentCategoryTitle = useBoundStore(
     (state) => state.categoryState.title,
   );
-  const selectMenuCategoryTitle = useBoundStore(
-    (state) => state.selectMenuCategoryTitle,
-  );
+  const selectMenuCategory = useBoundStore((state) => state.selectMenuCategory);
 
   function onClickChangeMenuTitle() {
     if (currentCategoryTitle === category.title) return;
-    selectMenuCategoryTitle({ title: category.title });
+    selectMenuCategory({ title: category.title });
   }
 
   return (

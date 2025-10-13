@@ -1,16 +1,15 @@
 "use client";
 
 import { ReactNode, useEffect } from "react";
-import { useParams } from "next/navigation";
 import { AnimatePresence } from "motion/react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import TableInitHeader from "@/feature/table/header";
 import TableInitMain from "@/feature/table/main";
 import SubmitButton from "@/feature/table/components/submit-button";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-
-import { ParamsList } from "./(router)/types";
+import { initTableQueryOption } from "@/lib/function/query/query-option";
 
 export default function TableInitPage() {
   return (
@@ -23,26 +22,16 @@ export default function TableInitPage() {
 }
 
 function TableInitPageBox({ children }: { children: ReactNode }) {
-  const params = useParams<ParamsList>();
-
   const isClicked = useBoundStore((state) => state.flagState.isClicked);
   const modalIsOpen = useBoundStore((state) => state.modalState.isOpen);
-  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const tableInfo = useBoundStore((state) => state.tableState);
   const submitStatus = useBoundStore((state) => state.submitState.status);
-  const fetchMode = useBoundStore((state) => state.submitState.fetchMode);
-  const setTableName = useBoundStore((state) => state.setTableName);
+  const setTableInfo = useBoundStore((state) => state.setTableInfo);
   const resetflagState = useBoundStore((state) => state.resetflagState);
   const setModalOpen = useBoundStore((state) => state.setModalOpen);
   const resetSubmitState = useBoundStore((state) => state.resetSubmitState);
-  const resetPickUpState = useBoundStore((state) => state.resetOrderState);
 
   useEffect(() => {
-    // 초기 접속 할당
-    if (!tableName) {
-      // 테이블 - 전역 상태
-      setTableName(params);
-    }
-
     // 모달 초기화
     if (modalIsOpen) {
       setModalOpen({ isOpen: false });
@@ -55,11 +44,18 @@ function TableInitPageBox({ children }: { children: ReactNode }) {
 
     if (submitStatus === "pending") return;
     resetSubmitState();
-
-    if (fetchMode === "order") {
-      resetPickUpState();
-    }
   }, []);
+
+  const queryClient = useQueryClient();
+  const tableQuery = queryClient.getQueryData(initTableQueryOption.queryKey);
+
+  /** 초기 접속 할당 */
+  useEffect(() => {
+    // 테이블 - 전역 상태
+    if (!tableQuery?.length) return;
+    if (!Object.keys(tableInfo).length) return;
+    setTableInfo({ ...tableQuery[0] });
+  }, [tableQuery]);
 
   return (
     <div className={`relative m-auto h-auto w-full cursor-default`}>

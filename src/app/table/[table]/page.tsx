@@ -3,6 +3,7 @@ import { getQueryClient } from "@/lib/function/query/get-query-client";
 import {
   initMenuCategoryListQueryOption,
   initMenuListQueryOption,
+  initTableQueryOption,
 } from "@/lib/function/query/query-option";
 
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -16,6 +17,7 @@ async function Page() {
   await Promise.all([
     queryClient.prefetchQuery(initMenuListQueryOption),
     queryClient.prefetchQuery(initMenuCategoryListQueryOption),
+    queryClient.prefetchQuery(initTableQueryOption),
   ]);
 
   return (

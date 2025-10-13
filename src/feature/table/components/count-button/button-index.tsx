@@ -9,11 +9,11 @@ import SimpleIcon from "../simple-icon/icon-index";
 
 export default function CountButton({
   type,
-  amount,
+  quantity,
   id,
 }: {
   type: CountButtonType;
-  amount: number;
+  quantity: number;
   id: number | string;
 }) {
   const changeRequestAmount = useBoundStore(
@@ -28,22 +28,22 @@ export default function CountButton({
   function onClickMenuCount(num: number) {
     return () => {
       // 수량 1개 이하 제한
-      const calcedAmount = calculateAmount(amount, num);
-      if (calcedAmount === amount) return;
+      const calcedAmount = calculateAmount(quantity, num);
+      if (calcedAmount === quantity) return;
 
       switch (type) {
         case "pick": {
-          changeMenuAmount({ amount: calcedAmount });
+          changeMenuAmount({ quantity: calcedAmount });
           break;
         }
         case "call": {
           const ItemId = id as Request["id"];
-          changeRequestAmount({ id: ItemId, amount: calcedAmount });
+          changeRequestAmount({ id: ItemId, quantity: calcedAmount });
           break;
         }
         case "pickUpList": {
           const listId = id as SelectedMenu["id"];
-          changeMenuAmountInList({ id: listId, amount: calcedAmount });
+          changeMenuAmountInList({ id: listId, quantity: calcedAmount });
           break;
         }
         default: {
@@ -60,16 +60,16 @@ export default function CountButton({
       }
     >
       <CountIconBox onClick={onClickMenuCount(-1)} type="minus" />
-      <DisplayAmount amount={amount} />
+      <DisplayAmount quantity={quantity} />
       <CountIconBox onClick={onClickMenuCount(1)} type="plus" />
     </div>
   );
 }
 
-function DisplayAmount({ amount }: { amount: number }) {
+function DisplayAmount({ quantity }: { quantity: number }) {
   return (
     <div className={"flex w-7 items-center justify-center"}>
-      <span>{amount}</span>
+      <span>{quantity}</span>
     </div>
   );
 }
