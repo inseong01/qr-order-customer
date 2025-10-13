@@ -1,37 +1,55 @@
-import { SliceCreator } from "@/types/common";
+import { SliceCreator } from "@/types/slice";
 
 type InitialState = {
   tableState: {
-    tableName: string;
+    id: string | undefined;
+    meta?: {};
+    number: number | undefined;
   };
 };
 
 const initialState: InitialState = {
   tableState: {
-    tableName: "",
+    id: undefined,
+    meta: {},
+    number: undefined,
   },
 };
 
 export interface TableSlice {
   tableState: {
-    tableName: string;
+    id: string | undefined;
+    meta?: {};
+    number: number | undefined;
   };
-  setTableName: ({ table }: { table: string }) => void;
+  setTableInfo: (info: InitialState) => void;
 }
 
 export const tableSlice: SliceCreator<TableSlice> =
   process.env.NODE_ENV === "development"
     ? (set) => ({
         ...initialState,
-        setTableName: ({ table }: { table: string }) =>
+        setTableInfo: (info) =>
           set(
-            () => ({ tableState: { tableName: table } }),
-            undefined,
-            "tableState/setTableName",
+            (state) => ({
+              ...state,
+              tableState: {
+                ...state.tableState,
+                ...info,
+              },
+            }),
+            false,
+            "tableState/setTableInfo",
           ),
       })
     : (set) => ({
         ...initialState,
-        setTableName: ({ table }: { table: string }) =>
-          set(() => ({ tableState: { tableName: table } })),
+        setTableInfo: (info) =>
+          set((state) => ({
+            ...state,
+            tableState: {
+              ...state.tableState,
+              ...info,
+            },
+          })),
       });

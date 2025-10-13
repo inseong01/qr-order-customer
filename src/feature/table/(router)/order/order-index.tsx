@@ -1,29 +1,32 @@
 "use client";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import AppVisitorHeader from "feature/table/(router)/components/header/header-index";
-import SubmitButton from "feature/table/components/submit-button/button-index";
-import AlertModal from "feature/components/modal/alert-modal/modal-index";
+
+import OrderConfirmModal from "@/feature/components/modal/confirm/order";
+import AppVisitorHeader from "@/feature/table/(router)/components/header";
+
 import OrderProcedure from "./order-main/main-index";
 import RoutePageFrame from "../components/frame/page/page-index";
+import SubmitButton from "../../components/submit-button";
 
 import { useEffect } from "react";
 
 export default function OrderPage() {
-  const setModalType = useBoundStore((state) => state.setModalType);
   const setFlag = useBoundStore((state) => state.setFlag);
 
   useEffect(() => {
-    setModalType({ type: "orderCheck" });
     setFlag({ isClicked: false });
   }, []);
 
   return (
     <RoutePageFrame>
       <AppVisitorHeader title={"주문"} />
+
       <OrderProcedure />
+
       <SubmitButtonComp />
-      <AlertModal />
+
+      <OrderConfirmModal />
     </RoutePageFrame>
   );
 }
@@ -32,9 +35,9 @@ function SubmitButtonComp() {
   const currentOrderList = useBoundStore((state) => state.orderState.list);
   const isNext = useBoundStore((state) => state.submitState.isNext);
 
-  return (
-    <SubmitButton
-      type={isNext ? "back" : currentOrderList.length !== 0 ? "order" : "back"}
-    />
-  );
+  if (isNext) return <SubmitButton type="back" />;
+
+  if (currentOrderList.length !== 0) return <SubmitButton type="order" />;
+
+  return <SubmitButton type={"back"} />;
 }

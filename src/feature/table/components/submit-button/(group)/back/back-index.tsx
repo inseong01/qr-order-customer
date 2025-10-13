@@ -2,18 +2,18 @@ import { useBoundStore } from "@/lib/store/use-bound-store";
 import Link from "next/link";
 
 export function SubmitBack() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
-  const setMenuCategoryId = useBoundStore(
-    (state) => state.selectMenuCategoryId,
-  );
+  const number = useBoundStore((state) => state.tableState.number);
+  const setMenuCategory = useBoundStore((state) => state.selectMenuCategory);
+  const resetOrderState = useBoundStore((state) => state.resetOrderState);
 
   function onClickSubmitBack() {
-    setMenuCategoryId({ id: 1 });
+    setMenuCategory({ title: "전체메뉴" });
+    resetOrderState();
   }
 
   return (
     <Link
-      href={`/table/${tableName}`}
+      href={`/table/${number}`}
       replace={true}
       className="flex h-full w-full"
     >

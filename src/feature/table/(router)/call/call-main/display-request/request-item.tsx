@@ -3,7 +3,7 @@ import { memo, ReactNode } from "react";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
 import { request_child } from "@/lib/motion/display-request/request-variants";
-import { RequestCategoryList } from "@/types/common";
+import { RequestCategoryList } from "@/types/table";
 
 function Request({
   req,
@@ -19,6 +19,8 @@ function Request({
     </RequestBox>
   );
 }
+
+export default memo(Request);
 
 function RequestBox({
   req,
@@ -39,7 +41,7 @@ function RequestBox({
     title: RequestCategoryList["title"];
   }) {
     return () => {
-      selectRequest({ id, title, amount: 1 });
+      selectRequest({ id, title, quantity: 1 });
     };
   }
 
@@ -59,5 +61,3 @@ function RequestBox({
     </motion.div>
   );
 }
-
-export default memo(Request);

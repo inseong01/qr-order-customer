@@ -1,0 +1,65 @@
+[
+  {
+    "id": "e5193195-80ed-4092-a060-a08692350a78",
+    "quantity": 4,
+    "menu_id": "3ccf2cdf-4f15-43ef-9feb-45f5aafc7f87",
+    "menu_name": "쉬림프 피자",
+    "menu_price": 14900,
+    "created_at": "2025-10-08T03:50:30.734439+00:00",
+    "table_number": 1
+  },
+  {
+    "id": "ee00e893-8424-40e9-8041-a2b3af8a0777",
+    "quantity": 4,
+    "menu_id": "0336f196-dc74-4c91-a1b8-5625d45f4386",
+    "menu_name": "베이컨버거",
+    "menu_price": 7200,
+    "created_at": "2025-10-08T03:50:30.734439+00:00",
+    "table_number": 1
+  },
+  {
+    "id": "e720d04d-0081-4fe6-8bfb-ca80ac3ba55d",
+    "quantity": 1,
+    "menu_id": "e2cb9676-b955-4244-8489-c5c74011d9c2",
+    "menu_name": "매운치킨",
+    "menu_price": 16200,
+    "created_at": "2025-09-07T03:30:06+00:00",
+    "table_number": 1
+  },
+  {
+    "id": "c1db2328-bb5f-4b30-acce-258b0f424549",
+    "quantity": 2,
+    "menu_id": "0336f196-dc74-4c91-a1b8-5625d45f4386",
+    "menu_name": "베이컨버거",
+    "menu_price": 7200,
+    "created_at": "2025-07-10T10:25:00+00:00",
+    "table_number": 1
+  },
+  {
+    "id": "7c23d4c9-b4ca-449d-aea2-2568854e59fb",
+    "quantity": 4,
+    "menu_id": "a63e56a5-9b4c-4a28-9585-dd2ba024e986",
+    "menu_name": "핫스파이스버거",
+    "menu_price": 7500,
+    "created_at": "2025-07-10T10:08:00+00:00",
+    "table_number": 1
+  },
+  {
+    "id": "f8362f7c-91af-4d23-a2ea-fefdb9603920",
+    "quantity": 2,
+    "menu_id": "6bd6d54c-c345-4e65-abaf-9f38619b66a7",
+    "menu_name": "치킨 피자",
+    "menu_price": 13900,
+    "created_at": "2025-07-10T10:00:00+00:00",
+    "table_number": 1
+  },
+  {
+    "id": "a485fc0c-9d43-44b2-a90c-a1e6432e38c3",
+    "quantity": 1,
+    "menu_id": "0336f196-dc74-4c91-a1b8-5625d45f4386",
+    "menu_name": "베이컨버거",
+    "menu_price": 7200,
+    "created_at": "2025-07-10T10:00:00+00:00",
+    "table_number": 1
+  }
+]

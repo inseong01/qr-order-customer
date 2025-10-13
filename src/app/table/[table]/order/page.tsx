@@ -1,5 +1,5 @@
-import { Params } from "@/types/common";
-import OrderPage from "feature/table/(router)/order/order-index";
+import { Params } from "@/feature/table/(router)/types";
+import OrderPage from "@/feature/table/(router)/order/order-index";
 
 import { Metadata } from "next";
 

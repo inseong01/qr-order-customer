@@ -1,37 +1,37 @@
-import { SliceCreator } from "@/types/common";
+import { SliceCreator } from "@/types/slice";
 
 type InitialState = {
   categoryState: {
-    id: number;
+    title: string;
   };
 };
 
 const initialState: InitialState = {
   categoryState: {
-    id: 1,
+    title: "전체메뉴",
   },
 };
 
 export interface MenuCategorySlice {
   categoryState: {
-    id: number;
+    title: string;
   };
-  selectMenuCategoryId: ({ id }: { id: number }) => void;
+  selectMenuCategory: ({ title }: { title: string }) => void;
 }
 
 export const menuCategorySlice: SliceCreator<MenuCategorySlice> =
   process.env.NODE_ENV === "development"
     ? (set) => ({
         ...initialState,
-        selectMenuCategoryId: ({ id }: { id: number }) =>
+        selectMenuCategory: ({ title }: { title: string }) =>
           set(
-            () => ({ categoryState: { id: id } }),
+            () => ({ categoryState: { title: title } }),
             undefined,
-            "categoryState/selectMenuCategoryId",
+            "categoryState/selectMenuCategory",
           ),
       })
     : (set) => ({
         ...initialState,
-        selectMenuCategoryId: ({ id }: { id: number }) =>
-          set(() => ({ categoryState: { id: id } })),
+        selectMenuCategory: ({ title }: { title: string }) =>
+          set(() => ({ categoryState: { title: title } })),
       });

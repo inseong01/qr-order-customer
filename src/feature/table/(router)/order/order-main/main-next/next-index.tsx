@@ -1,13 +1,13 @@
 "use client";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
-import ProcessedOrderList from "./display-order/order-index";
-import VerticalStackGroup from "feature/table/(router)/components/vertical-stack/stack-index";
 
-import { motion } from "motion/react";
-import { useQueryClient } from "@tanstack/react-query";
+import VerticalStackGroup from "@/feature/table/(router)/components/vertical-stack/stack-index";
+
+import ProcessedOrderList from "./display-order/order-index";
+
 import { ReactNode } from "react";
+import { motion } from "motion/react";
 
 export default function ProcessResult() {
   return (
@@ -25,18 +25,11 @@ export default function ProcessResult() {
 }
 
 function OrderProcessResult() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
-  const submitStatus = useBoundStore((state) => state.submitState.status);
+  const isSuccess = useBoundStore((state) => state.submitState.isSuccess);
 
-  const query = useQueryClient();
-  const queryState = query.getQueryState(
-    orderListQueryOption(tableName).queryKey,
-  );
-
-  const isOk = submitStatus === "fulfilled" && queryState?.status === "success";
-  const status = isOk ? "ok" : "fail";
-  const result = isOk ? "완료" : "실패";
-  const description = isOk
+  const status = isSuccess ? "ok" : "fail";
+  const result = isSuccess ? "완료" : "실패";
+  const description = isSuccess
     ? "정상적으로 접수되었어요, 조금만 기다려주세요!"
     : "정상적으로 접수되지 않았어요, 직원을 호출해주세요!";
 
@@ -47,34 +40,28 @@ function OrderProcessResult() {
       }
     >
       <h1 className="text-3xl font-bold">
-        주문이 <span data-tag={status}>{result}</span>되었어요
+        주문이 <span data-tag={status}>{result}</span>되었어요.
       </h1>
-      <p className={"text-xs text-[#959595]"}>{description}</p>
+
+      <p className="text-xs text-[#959595]">{description}</p>
     </div>
   );
 }
 
 function ProcessedtOrder() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
-  const submitStatus = useBoundStore((state) => state.submitState.status);
-
-  const queryClient = useQueryClient();
-  const orderList = queryClient.getQueryState(
-    orderListQueryOption(tableName).queryKey,
-  );
-
-  const isOk = submitStatus === "fulfilled" && orderList?.status === "success";
+  const number = useBoundStore((state) => state.tableState.number);
+  const isSuccess = useBoundStore((state) => state.submitState.isSuccess);
 
   return (
     <VerticalStackGroup tag="div" gap="gap-5">
       <MenuListBox>
-        {isOk ? (
-          <ProcessedOrderList queryData={orderList.data} />
-        ) : (
-          <EmptyListComponent />
-        )}
+        {isSuccess ? <ProcessedOrderList /> : <EmptyListComponent />}
       </MenuListBox>
-      <BillInfo tableName={tableName} />
+
+      <div className={"flex flex-col gap-1 text-center text-xs text-[#959595]"}>
+        <span>결제는 후불입니다.</span>
+        <span>현재 앉아 계신 테이블 번호는 {number}번 입니다.</span>
+      </div>
     </VerticalStackGroup>
   );
 }
@@ -91,15 +78,6 @@ function MenuListBox({ children }: { children: ReactNode }) {
   );
 }
 
-function BillInfo({ tableName }: { tableName: string }) {
-  return (
-    <div className={"flex flex-col gap-1 text-center text-xs text-[#959595]"}>
-      <span>결제는 후불입니다.</span>
-      <span>현재 앉아 계신 테이블 번호는 {tableName}번 입니다.</span>
-    </div>
-  );
-}
-
-function EmptyListComponent() {
+export function EmptyListComponent() {
   return <div className={"text-[#959595]"}>접수된 주문이 없습니다.</div>;
 }

@@ -1,43 +1,16 @@
 "use client";
 
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import { orderListQueryOption } from "@/lib/function/useQuery/query-option";
+
 import CheckOrderList from "./display-order/order-index";
 import ProcessResult from "./main-next/next-index";
 import Divider from "../../components/line/line-index";
 import VerticalStackGroup from "../../components/vertical-stack/stack-index";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 export default function OrderProcedure() {
-  const tableName = useBoundStore((state) => state.tableState.tableName);
-  const submitStatus = useBoundStore((state) => state.submitState.status);
   const isNext = useBoundStore((state) => state.submitState.isNext);
-  const setNexPageEnable = useBoundStore((state) => state.setNexPageEnable);
-
-  const { refetch } = useQuery(orderListQueryOption(tableName));
-
-  // 주문 완료 시 주문 데이터 추출
-  useEffect(() => {
-    // 중복 refetch 제한
-    if (isNext) return;
-
-    // submitStatus 상황 처리
-    if (!submitStatus) return;
-    if (submitStatus === "pending") return;
-    if (submitStatus === "fulfilled") {
-      refetch();
-    }
-
-    // 주문 처리 결과 화면전환 지연시간 부여
-    const timer = setTimeout(() => {
-      setNexPageEnable({ isNext: true });
-    }, 400);
-
-    return () => clearTimeout(timer);
-  }, [submitStatus]);
 
   return (
     <AnimatePresence mode="popLayout">
@@ -52,8 +25,10 @@ export default function OrderProcedure() {
         >
           <VerticalStackGroup tag="div" gap="gap-2.5">
             <p>주문표 목록</p>
+
             <Divider />
           </VerticalStackGroup>
+
           <CheckOrderList />
         </motion.main>
       ) : (

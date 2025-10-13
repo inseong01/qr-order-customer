@@ -1,10 +1,11 @@
 {
   "name": "qr-order-customer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.mjs",
+    "dev": "next dev",
+    "dev:app": "node server.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,18 +14,22 @@
     "commit": "bash ./src/lib/function/auto/bash/commit-work-log.sh"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.3.1",
+    "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.47.8",
     "@tailwindcss/postcss": "^4.1.4",
     "@tailwindcss/vite": "^4.1.4",
     "@tanstack/react-query": "^5.61.0",
     "dotenv": "^16.4.5",
     "motion": "^11.11.17",
-    "next": "15.0.3",
+    "next": "^15.5.4",
     "postcss": "^8.5.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.2",
+    "uuid": "^13.0.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

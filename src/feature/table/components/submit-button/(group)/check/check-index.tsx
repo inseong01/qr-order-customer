@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export function CheckMenu() {
   const isClicked = useBoundStore((state) => state.flagState.isClicked);
   const setFlag = useBoundStore((state) => state.setFlag);
-  const tableName = useBoundStore((state) => state.tableState.tableName);
+  const number = useBoundStore((state) => state.tableState.number);
 
   const router = useRouter();
 
@@ -15,7 +15,7 @@ export function CheckMenu() {
 
     setFlag({ isClicked: true });
 
-    router.push(`${tableName}/order`);
+    router.push(`${number}/order`);
   }
 
   return (

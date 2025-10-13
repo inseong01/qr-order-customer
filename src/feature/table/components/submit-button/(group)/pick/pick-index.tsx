@@ -1,5 +1,5 @@
 import { useBoundStore } from "@/lib/store/use-bound-store";
-import CountButton from "feature/table/components/count-button/button-index";
+import CountButton from "@/feature/table/components/count-button/button-index";
 
 // Top
 export function MenuCount() {
@@ -8,7 +8,7 @@ export function MenuCount() {
     (state) => state.orderState.selectedMenu.id,
   );
   const selectedMenuAmount = useBoundStore(
-    (state) => state.orderState.selectedMenu.amount,
+    (state) => state.orderState.selectedMenu.quantity,
   );
 
   return (
@@ -18,7 +18,7 @@ export function MenuCount() {
       </div>
       <CountButton
         type={"pick"}
-        amount={selectedMenuAmount}
+        quantity={selectedMenuAmount}
         id={selectedMenuID}
       />
     </div>

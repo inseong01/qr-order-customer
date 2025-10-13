@@ -1,4 +1,4 @@
-import LogoImage from "feature/components/logo/logo-index";
+import LogoImage from "@/feature/components/logo/logo-index";
 
 import { cookies } from "next/headers";
 import { Metadata } from "next";
@@ -23,9 +23,20 @@ export default async function NotFound() {
         }
       >
         <div className={"flex h-[90%] flex-col justify-center gap-12"}>
-          <TopContext />
-          <BottomContext />
+          {/* 상단 */}
+          <div className={"flex flex-col gap-3"}>
+            <h1>404 &#x003A;&#x0028;</h1>
+            <div className={"w-full text-2xl leading-8 font-bold break-keep"}>
+              <p>페이지가</p>
+              <p>존재하지 않아요.</p>
+            </div>
+          </div>
+
+          {/* 하단 */}
+          <PageReturnButton />
         </div>
+
+        {/* 하단 로고 */}
         <div className={"flex h-[10%] flex-col items-end justify-end"}>
           <LogoImage />
         </div>
@@ -34,19 +45,7 @@ export default async function NotFound() {
   );
 }
 
-function TopContext() {
-  return (
-    <div className={"flex flex-col gap-3"}>
-      <h1>404 &#x003A;&#x0028;</h1>
-      <div className={"w-full text-2xl leading-8 font-bold break-keep"}>
-        <p>페이지가</p>
-        <p>존재하지 않아요.</p>
-      </div>
-    </div>
-  );
-}
-
-async function BottomContext() {
+async function PageReturnButton() {
   const cookie = await cookies();
   const table = cookie.get("table");
   const link = table?.value ? `/table/${table.value}` : "/";
